@@ -1,0 +1,15 @@
+import express from "express";
+import adminAuthRoutes from "./adminAuthRoutes.js";
+import adminDashboardRoutes from "./adminDashboardRoutes.js";
+import adminOrderRoutes from "./adminOrderRoutes.js";
+import adminUserRoutes from "./adminUserRoutes.js";
+import productRoutes from "./productRoutes.js";
+import blogRoutes from "./blogRoutes.js";
+const adminRouter = express.Router();
+adminRouter.use("/auth", adminAuthRoutes);
+adminRouter.use("/dashboard", adminDashboardRoutes);
+adminRouter.use("/orders", adminOrderRoutes);
+adminRouter.use("/users", adminUserRoutes);
+adminRouter.use("/products", productRoutes);
+adminRouter.use("/blogs", blogRoutes);
+export default adminRouter;
