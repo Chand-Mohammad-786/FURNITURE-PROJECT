@@ -24,10 +24,13 @@ const VerifyOtp = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:9696/user/verify-otp", {
-        email: state.email,
-        otp,
-      });
+      const res = await axios.post(
+        "https://furniture-project-spox.onrender.com/user/verify-otp",
+        {
+          email: state.email,
+          otp,
+        }
+      );
 
       if (res.data.status === 400) {
         toast.error(res.data.message);

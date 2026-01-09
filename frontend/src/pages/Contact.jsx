@@ -49,7 +49,10 @@ const Contact = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:9696/api/contact", form);
+      await axios.post(
+        "https://furniture-project-spox.onrender.com/api/contact",
+        form
+      );
       alert("Message sent successfully");
 
       setForm({

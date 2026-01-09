@@ -145,7 +145,9 @@ const BlogList = () => {
 
   const loadBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:9696/admin/blogs");
+      const res = await axios.get(
+        "https://furniture-project-spox.onrender.com/admin/blogs"
+      );
       setBlogs(res.data.blogs || []);
     } catch (error) {
       console.log(error);
@@ -154,7 +156,9 @@ const BlogList = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this blog?")) return;
-    await axios.delete(`http://localhost:9696/admin/blogs/${id}`);
+    await axios.delete(
+      `https://furniture-project-spox.onrender.com/admin/blogs/${id}`
+    );
     loadBlogs();
   };
 
@@ -201,22 +205,12 @@ const BlogList = () => {
                           blog.image?.startsWith("http")
                             ? blog.image
                             : blog.image
-                            ? `http://localhost:9696/uploads/${blog.image}`
+                            ? `https://furniture-project-spox.onrender.com/uploads/${blog.image}`
                             : "https://via.placeholder.com/60"
                         }
                         alt=""
                         style={styles.img}
                       />
-
-                      {/* <img
-                        src={
-                          blog.image
-                            ? `http://localhost:9696/uploads/${blog.image}`
-                            : "https://via.placeholder.com/60"
-                        }
-                        alt=""
-                        style={styles.img}
-                      /> */}
                     </td>
 
                     <td style={{ ...styles.td, fontWeight: 500 }}>

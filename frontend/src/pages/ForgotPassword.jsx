@@ -25,7 +25,7 @@ const ForgotPassword = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:9696/user/forgot-password",
+        "https://furniture-project-spox.onrender.com/user/forgot-password",
         { email: trimmedEmail }
       );
 

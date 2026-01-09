@@ -9,11 +9,14 @@ const OrderList = () => {
   /* ================= LOAD ORDERS ================= */
   const loadOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:9696/admin/orders", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-      });
+      const res = await axios.get(
+        "https://furniture-project-spox.onrender.com/admin/orders",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+        }
+      );
       setOrders(res.data.orders || []);
     } catch (err) {
       console.log("Orders load error:", err);
@@ -29,7 +32,7 @@ const OrderList = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://localhost:9696/admin/orders/update-status/${id}`,
+        `https://furniture-project-spox.onrender.com/admin/orders/update-status/${id}`,
         { status },
         {
           headers: {
@@ -48,11 +51,14 @@ const OrderList = () => {
     if (!window.confirm("Delete this order?")) return;
 
     try {
-      await axios.delete(`http://localhost:9696/admin/orders/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-      });
+      await axios.delete(
+        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+        }
+      );
       loadOrders();
     } catch (err) {
       console.log("Delete failed:", err);

@@ -11,7 +11,7 @@ function TrackOrder() {
     const fetchOrder = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:9696/user/order/track/${trackingNumber}`
+          `https://furniture-project-spox.onrender.com/user/order/track/${trackingNumber}`
         );
         setOrder(res.data.order);
       } catch (err) {

@@ -9,11 +9,14 @@ const OrderDetail = () => {
   /* ================= LOAD ORDER ================= */
   const loadOrder = async () => {
     try {
-      const res = await axios.get(`http://localhost:9696/admin/orders/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-      });
+      const res = await axios.get(
+        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+        }
+      );
       setOrder(res.data.order);
     } catch (err) {
       console.log("Admin order detail error:", err);

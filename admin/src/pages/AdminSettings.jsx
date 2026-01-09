@@ -95,7 +95,7 @@ const AdminSettings = () => {
 
     try {
       const res = await axios.put(
-        "http://localhost:9696/admin/change-credentials",
+        "https://furniture-project-spox.onrender.com/admin/change-credentials",
         {
           currentPassword: oldPassword,
           newEmail,

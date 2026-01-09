@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { io as ioClient } from "socket.io-client";
 
-const SOCKET_URL = "http://localhost:9696";
+const SOCKET_URL = "https://furniture-project-spox.onrender.com";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -12,11 +12,14 @@ const ProductList = () => {
   /* ================= LOAD PRODUCTS ================= */
   const loadProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:9696/admin/products", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-      });
+      const res = await axios.get(
+        "https://furniture-project-spox.onrender.com/admin/products",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+        }
+      );
       setProducts(res.data.products || []);
     } catch (err) {
       console.log(err);
@@ -31,11 +34,14 @@ const ProductList = () => {
       return;
 
     try {
-      await axios.delete(`http://localhost:9696/admin/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-      });
+      await axios.delete(
+        `https://furniture-project-spox.onrender.com/admin/products/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+        }
+      );
     } catch (err) {
       console.log("Delete failed", err);
     }

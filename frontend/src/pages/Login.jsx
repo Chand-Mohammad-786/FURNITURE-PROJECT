@@ -23,7 +23,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:9696/user/login",
+        "https://furniture-project-spox.onrender.com/user/login",
         data
       );
 

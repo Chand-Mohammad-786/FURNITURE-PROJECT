@@ -75,7 +75,7 @@ function CheckOut() {
 
     try {
       await axios.post(
-        "http://localhost:9696/user/orders",
+        "https://furniture-project-spox.onrender.com/user/orders",
         {
           userId, // ✅ REQUIRED BY BACKEND
           items,

@@ -22,11 +22,15 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post("http://localhost:9696/admin/products", data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-      },
-    });
+    await axios.post(
+      "https://furniture-project-spox.onrender.com/admin/products",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      }
+    );
 
     navigate("/admin/products");
   };

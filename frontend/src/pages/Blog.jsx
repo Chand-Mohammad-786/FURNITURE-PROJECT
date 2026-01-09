@@ -50,7 +50,7 @@ const Blog = () => {
   useEffect(() => {
     const loadBlogs = () => {
       axios
-        .get("http://localhost:9696/admin/blogs/public")
+        .get("https://furniture-project-spox.onrender.com/admin/blogs/public")
         .then((res) => setAdminBlogs(res.data.blogs || []))
         .catch((err) => console.log(err));
     };
@@ -75,7 +75,7 @@ const Blog = () => {
       image: b.image
         ? b.image.startsWith("http")
           ? b.image
-          : `http://localhost:9696/uploads/${b.image}`
+          : `https://furniture-project-spox.onrender.com/uploads/${b.image}`
         : "images/post-1.jpg",
     })),
   ];

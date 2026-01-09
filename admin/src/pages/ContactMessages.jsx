@@ -8,7 +8,9 @@ const ContactMessages = () => {
 
   const loadMessages = async () => {
     try {
-      const res = await axios.get("http://localhost:9696/api/contact");
+      const res = await axios.get(
+        "https://furniture-project-spox.onrender.com/api/contact"
+      );
       setMessages(res.data);
     } catch (err) {
       console.error("Load messages error:", err);

@@ -12,9 +12,12 @@ const AdminOrders = () => {
   /* ================= LOAD ORDERS ================= */
   const loadOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:9696/admin/orders", {
-        params: { range: filterRange },
-      });
+      const res = await axios.get(
+        "https://furniture-project-spox.onrender.com/admin/orders",
+        {
+          params: { range: filterRange },
+        }
+      );
       setOrders(res.data.orders || []);
     } catch (err) {
       console.error("Load orders error:", err);
@@ -49,10 +52,13 @@ const AdminOrders = () => {
 
     if (!reason) return;
 
-    await axios.put(`http://localhost:9696/admin/orders/${id}`, {
-      status: "Cancelled",
-      reason,
-    });
+    await axios.put(
+      `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+      {
+        status: "Cancelled",
+        reason,
+      }
+    );
   };
 
   /* ================= STATUS COLOR ================= */

@@ -24,7 +24,7 @@ const AdminLogin = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:9696/admin/auth/login",
+        "https://furniture-project-spox.onrender.com/admin/auth/login",
         data,
         {
           headers: { "Content-Type": "application/json" },

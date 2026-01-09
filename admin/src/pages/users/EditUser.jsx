@@ -15,11 +15,14 @@ const EditUser = () => {
 
   // 🔹 load user (SAFE)
   useEffect(() => {
-    fetch(`http://localhost:9696/user/findByIdByParams/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-      },
-    })
+    fetch(
+      `https://furniture-project-spox.onrender.com/user/findByIdByParams/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         if (res && res.success && res.body) {
@@ -51,17 +54,20 @@ const EditUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:9696/user/userUpdate/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-      },
-      body: JSON.stringify({
-        id,
-        ...data,
-      }),
-    });
+    await fetch(
+      `https://furniture-project-spox.onrender.com/user/userUpdate/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+        body: JSON.stringify({
+          id,
+          ...data,
+        }),
+      }
+    );
 
     navigate("/admin/users");
   };

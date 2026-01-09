@@ -15,9 +15,12 @@ const EditOrder = () => {
   /* ================= LOAD ORDER ================= */
   const loadOrder = async () => {
     try {
-      const res = await axios.get(`http://localhost:9696/admin/orders/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setOrder(res.data.order);
       setStatus(res.data.order.status);
@@ -36,7 +39,7 @@ const EditOrder = () => {
   const updateOrder = async () => {
     try {
       await axios.put(
-        `http://localhost:9696/admin/orders/${id}`,
+        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
         { status }, // ❌ no cancel logic here
         {
           headers: { Authorization: `Bearer ${token}` },

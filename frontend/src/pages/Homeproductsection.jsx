@@ -108,7 +108,9 @@ const Homeproductsection = ({ showDynamic = false }) => {
 
   const loadProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:9696/products");
+      const res = await axios.get(
+        "https://furniture-project-spox.onrender.com/products"
+      );
       setDynamicProducts(res.data?.products || []);
     } catch {
       setDynamicProducts([]);

@@ -9,7 +9,7 @@ const UserDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:9696/admin/users/${id}`, {
+      .get(`https://furniture-project-spox.onrender.com/admin/users/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },

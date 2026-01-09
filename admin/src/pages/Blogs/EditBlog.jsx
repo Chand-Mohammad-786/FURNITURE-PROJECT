@@ -15,7 +15,9 @@ const EditBlog = () => {
 
   const loadBlog = async () => {
     try {
-      const res = await axios.get(`http://localhost:9696/admin/blogs/${id}`);
+      const res = await axios.get(
+        `https://furniture-project-spox.onrender.com/admin/blogs/${id}`
+      );
       const blog = res.data.blog;
 
       setData({
@@ -37,12 +39,15 @@ const EditBlog = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:9696/admin/blogs/${id}`, {
-        title: data.title,
-        category: data.category,
-        content: data.content,
-        image: data.image, // ✅ URL only
-      });
+      await axios.put(
+        `https://furniture-project-spox.onrender.com/admin/blogs/${id}`,
+        {
+          title: data.title,
+          category: data.category,
+          content: data.content,
+          image: data.image, // ✅ URL only
+        }
+      );
 
       navigate("/admin/blogs");
     } catch (err) {
