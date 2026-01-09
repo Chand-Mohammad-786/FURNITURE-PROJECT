@@ -38,6 +38,8 @@ app.use("/user", userRouter);
 app.use("/products", productRoutes);
 app.use("/admin", adminRouter);
 app.use("/api/contact", contactRoutes);
+app.use("/api", userRouter);
+
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {

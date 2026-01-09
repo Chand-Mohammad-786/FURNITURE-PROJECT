@@ -10,6 +10,7 @@ import {
   forgotPassword,
   verifyOtp,
   resetPassword,
+  sendWelcomeMail,
 } from "../controller/userController.js";
 
 import {
@@ -37,4 +38,5 @@ userRouter.put("/orders/cancel/:id", cancelOrder);
 userRouter.delete("/orders/remove/:id", removeOrderFromHistory);
 userRouter.get("/orders/track/:trackingNumber", trackOrder);
 userRouter.get("/orders/:userId", getOrdersByUser);
+userRouter.post("/send-mail", sendWelcomeMail);
 export default userRouter;
