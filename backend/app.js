@@ -29,6 +29,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "http://localhost:4000",
       "https://furniture-project-w231.vercel.app",
       "https://furniture-project-spox.onrender.com",
     ],
@@ -68,6 +69,7 @@ const io = new Server(httpServer, {
   cors: {
     origin: [
       "http://localhost:3000",
+      "http://localhost:4000",
       "https://furniture-project-w231.vercel.app",
       "https://furniture-project-spox.onrender.com",
     ],
