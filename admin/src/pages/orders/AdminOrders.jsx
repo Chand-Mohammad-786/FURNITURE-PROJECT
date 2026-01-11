@@ -57,9 +57,38 @@ const AdminOrders = () => {
       {
         status: "Cancelled",
         reason,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
       }
     );
+
+    Swal.fire("Cancelled!", "Order cancelled successfully", "success");
+    loadOrders();
   };
+
+  // const cancelOrder = async (id) => {
+  //   const { value: reason } = await Swal.fire({
+  //     title: "Cancel Order",
+  //     input: "textarea",
+  //     inputLabel: "Cancel Reason",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Confirm Cancel",
+  //     confirmButtonColor: "#dc2626",
+  //   });
+
+  //   if (!reason) return;
+
+  //   await axios.put(
+  //     `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+  //     {
+  //       status: "Cancelled",
+  //       reason,
+  //     }
+  //   );
+  // };
 
   /* ================= STATUS COLOR ================= */
   const statusColor = (status) => {

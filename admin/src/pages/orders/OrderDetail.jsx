@@ -105,7 +105,7 @@ const OrderDetail = () => {
               <div>
                 <b>Order Price:</b> ₹{item.price}
               </div>
-              {product && (
+              {/* {product && (
                 <>
                   <hr style={{ margin: "8px 0" }} />
 
@@ -117,7 +117,7 @@ const OrderDetail = () => {
                     <b>Description:</b> {product.description || "—"}
                   </div>
                 </>
-              )}
+              )} */}
             </div>
           </div>
         );
