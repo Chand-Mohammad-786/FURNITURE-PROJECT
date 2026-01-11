@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import API_BASE from "../api";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -24,10 +25,12 @@ const Signup = () => {
     try {
       e.preventDefault();
 
-      const response = await axios.post(
-        "https://furniture-project-spox.onrender.com/user/signup",
-        data
-      );
+      const response = await axios.post(`${API_BASE}/user/signup`, data);
+
+      // const response = await axios.post(
+      //   "https://furniture-project-spox.onrender.com/user/signup",
+      //   data
+      // );
 
       if (response.data.status === 400) {
         toast.error(response.data.message);

@@ -1,5 +1,4 @@
 import React from "react";
-
 const Homechoosesection = () => {
   return (
     <section className="why-choose-section ">

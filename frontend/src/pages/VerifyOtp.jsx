@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import API_BASE from "../api.js";
 
 const VerifyOtp = () => {
   const navigate = useNavigate();
@@ -24,13 +25,17 @@ const VerifyOtp = () => {
     }
 
     try {
-      const res = await axios.post(
-        "https://furniture-project-spox.onrender.com/user/verify-otp",
-        {
-          email: state.email,
-          otp,
-        }
-      );
+      const res = await axios.post(`${API_BASE}/user/verify-otp`, {
+        email: state.email,
+        otp,
+      });
+      // const res = await axios.post(
+      //   "https://furniture-project-spox.onrender.com/user/verify-otp",
+      //   {
+      //     email: state.email,
+      //     otp,
+      //   }
+      // );
 
       if (res.data.status === 400) {
         toast.error(res.data.message);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import API_BASE from "../api.js";
 
 function TrackOrder() {
   const { trackingNumber } = useParams();
@@ -11,8 +12,12 @@ function TrackOrder() {
     const fetchOrder = async () => {
       try {
         const res = await axios.get(
-          `https://furniture-project-spox.onrender.com/user/order/track/${trackingNumber}`
+          `${API_BASE}/user/order/track/${trackingNumber}`
         );
+
+        // const res = await axios.get(
+        //   `https://furniture-project-spox.onrender.com/user/order/track/${trackingNumber}`
+        // );
         setOrder(res.data.order);
       } catch (err) {
         console.log("Error loading tracking info:", err);

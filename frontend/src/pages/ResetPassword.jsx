@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import API_BASE from "../api.js";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -32,14 +33,18 @@ const ResetPassword = () => {
 
     try {
       setLoading(true);
+      const res = await axios.post(`${API_BASE}/user/reset-password`, {
+        email: state.email,
+        password: pass,
+      });
 
-      const res = await axios.post(
-        "https://furniture-project-spox.onrender.com/user/reset-password",
-        {
-          email: state.email,
-          password: pass,
-        }
-      );
+      // const res = await axios.post(
+      //   "https://furniture-project-spox.onrender.com/user/reset-password",
+      //   {
+      //     email: state.email,
+      //     password: pass,
+      //   }
+      // );
 
       if (res.data.status === 400) {
         toast.error(res.data.message);

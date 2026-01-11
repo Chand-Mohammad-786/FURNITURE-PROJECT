@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { saveToken } from "../utils/auth";
+import API_BASE from "../api.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,10 +23,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://furniture-project-spox.onrender.com/user/login",
-        data
-      );
+      const response = await axios.post(`${API_BASE}/user/login`, data);
+
+      // const response = await axios.post(
+      //   "https://furniture-project-spox.onrender.com/user/login",
+      //   data
+      // );
 
       if (!response.data.success) {
         toast.error(response.data.message);
