@@ -93,9 +93,9 @@ const Blog = () => {
                   <Link to="/shop" className="btn btn-secondary me-2">
                     Shop Now
                   </Link>
-                  <Link to="/shop" className="btn btn-white-outline">
+                  {/* <Link to="/shop" className="btn btn-white-outline">
                     Explore
-                  </Link>
+                  </Link> */}
                 </p>
               </div>
             </div>

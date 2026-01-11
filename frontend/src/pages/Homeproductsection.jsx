@@ -125,7 +125,7 @@ const Homeproductsection = ({ showDynamic = false }) => {
               Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet
               velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
             </p>
-            <Link to="blog" className="explore-btn">
+            <Link to="/blog" className="explore-btn">
               Explore
             </Link>
           </div>

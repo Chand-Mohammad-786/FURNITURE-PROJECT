@@ -22,7 +22,7 @@ const Service = () => {
                     Shop Now
                   </Link>
 
-                  <Link to="/Services" className="btn btn-white-outline">
+                  <Link to="/blog" className="btn btn-white-outline">
                     Explore
                   </Link>
                 </p>

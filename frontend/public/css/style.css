@@ -847,9 +847,9 @@ a.more {
 
 .blog-section .post-entry .post-content-entry h3 {
   font-size: 16px;
-  margin-bottom: 0;
+
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .blog-section .post-entry .post-content-entry .meta {
@@ -955,7 +955,7 @@ a.more {
 
 
 .blog-section .post-entry h3 {
-  min-height: 42px;
+  min-height: 22px;
 
   overflow: hidden;
 }
@@ -967,7 +967,7 @@ a.more {
 
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: 66px;
+  min-height: 26px;
 }
 
 

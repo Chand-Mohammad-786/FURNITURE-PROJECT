@@ -19,7 +19,7 @@ const Homeherosection = () => {
                 <Link to="/shop" className="btn btn-secondary me-2">
                   Shop Now
                 </Link>
-                <Link to="#" className="btn btn-white-outline">
+                <Link to="/blog" className="btn btn-white-outline">
                   Explore
                 </Link>
               </p>
