@@ -32,6 +32,7 @@ app.use(
       "http://localhost:4000",
       "https://furniture-project-w231.vercel.app",
       "https://furniture-project-spox.onrender.com",
+      "https://furniture-project-6d2z.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
@@ -42,20 +43,15 @@ app.use(
 //   cors({
 //     origin: [
 //       "http://localhost:3000",
+//       "http://localhost:4000",
 //       "https://furniture-project-w231.vercel.app",
+//       "https://furniture-project-spox.onrender.com",
 //     ],
 //     methods: ["GET", "POST", "PUT", "DELETE"],
 //     credentials: true,
 //   })
 // );
 
-// app.use(
-//   cors({
-//     origin: ["https://furniture-project-w231.vercel.app"],
-//     credentials: true,
-//   })
-// );
-// app.use(cors());
 app.use(fileUpload());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/user", userRouter);
@@ -72,6 +68,7 @@ const io = new Server(httpServer, {
       "http://localhost:4000",
       "https://furniture-project-w231.vercel.app",
       "https://furniture-project-spox.onrender.com",
+      "https://furniture-project-6d2z.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
@@ -82,20 +79,15 @@ const io = new Server(httpServer, {
 //   cors: {
 //     origin: [
 //       "http://localhost:3000",
+//       "http://localhost:4000",
 //       "https://furniture-project-w231.vercel.app",
+//       "https://furniture-project-spox.onrender.com",
 //     ],
 //     methods: ["GET", "POST", "PUT", "DELETE"],
 //     credentials: true,
 //   },
 // });
 
-// const io = new Server(httpServer, {
-//   cors: {
-//     origin: "https://furniture-project-w231.vercel.app",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   },
-// });
 app.set("io", io);
 export { io };
 io.on("connection", (socket) => {
