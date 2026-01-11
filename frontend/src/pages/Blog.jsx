@@ -3,7 +3,7 @@ import Hometestimonialsection from "./Hometestimonialsection";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import socket from "../socket";
-import API_BASE from "../api.js";
+import API_BASE from "../api";
 
 const Blog = () => {
   /* ================= STATIC BLOGS ================= */
@@ -60,7 +60,7 @@ const Blog = () => {
     return () => socket.off("blog-updated", loadBlogs);
   }, []);
 
-  /* ================= MERGE ================= */
+  /* ================= MERGE BLOGS ================= */
   const allBlogs = [
     ...staticBlogs,
     ...[...adminBlogs].reverse().map((b, index) => ({
@@ -79,11 +79,11 @@ const Blog = () => {
 
   return (
     <>
-      {/* HERO */}
+      {/* HERO SECTION */}
       <div className="hero">
         <div className="container">
           <div className="row justify-content-between">
-            <div className="col-lg-5">
+            <div className="col-lg-5 align-items-start">
               <div className="intro-excerpt">
                 <h1>Blog</h1>
                 <p className="mb-4">
@@ -100,7 +100,7 @@ const Blog = () => {
               </div>
             </div>
 
-            <div className="col-lg-7">
+            <div className="col-lg-7 align-items-start">
               <div className="hero-img-wrap">
                 <img
                   src="/images/couch.png"
@@ -113,25 +113,60 @@ const Blog = () => {
         </div>
       </div>
 
-      {/* BLOGS */}
+      {/* BLOG SECTION */}
       <div className="blog-section">
         <div className="container">
           <div className="row">
             {allBlogs.map((blog) => (
               <div key={blog._id} className="col-12 col-sm-6 col-md-4 mb-5">
-                <div className="post-entry">
-                  <img src={blog.image} alt="blog" className="img-fluid" />
+                <div
+                  className="post-entry"
+                  style={{ transition: "transform 0.3s ease" }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.transform = "scale(1.03)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.transform = "scale(1)")
+                  }
+                >
+                  <Link to="#" className="post-thumbnail">
+                    <img src={blog.image} alt="blog" className="img-fluid" />
+                  </Link>
 
                   <div className="post-content-entry">
-                    <h3>{blog.title}</h3>
+                    <h3>
+                      <Link to="#">{blog.title}</Link>
+                    </h3>
 
-                    <p className="blog-content">
-                      {blog.content.slice(0, 90)}...
+                    {/* Reduced spacing here */}
+                    <p
+                      className="blog-content"
+                      style={{
+                        marginBottom: "0px",
+                        lineHeight: "1.4",
+                      }}
+                    >
+                      {blog.content
+                        ? blog.content.slice(0, 90)
+                        : "No description"}
+                      ...
                     </p>
 
-                    <div className="meta">
-                      <span>by {blog.author}</span>
-                      <span> on {blog.date}</span>
+                    {/* Reduced top margin here */}
+                    <div
+                      className="meta"
+                      style={{
+                        marginTop: "0px",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <span>
+                        by <Link to="#">{blog.author}</Link>
+                      </span>
+                      <span>
+                        {" "}
+                        on <Link to="#">{blog.date}</Link>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -153,7 +188,7 @@ export default Blog;
 // import { Link } from "react-router-dom";
 // import axios from "axios";
 // import socket from "../socket";
-
+// import API_BASE from "../api.js";
 // const Blog = () => {
 //   /* ================= BASE STATIC BLOGS (WRITE ONCE) ================= */
 //   const baseStaticBlogs = [
@@ -195,6 +230,7 @@ export default Blog;
 //     }));
 
 //   /* ================= ADMIN BLOGS (DYNAMIC) ================= */
+
 //   const [adminBlogs, setAdminBlogs] = useState([]);
 
 //   useEffect(() => {
@@ -214,6 +250,7 @@ export default Blog;
 //   }, []);
 
 //   /* ================= MERGE STATIC + DYNAMIC ================= */
+
 //   const allBlogs = [
 //     ...staticBlogs,
 //     ...[...adminBlogs].reverse().map((b, index) => ({
