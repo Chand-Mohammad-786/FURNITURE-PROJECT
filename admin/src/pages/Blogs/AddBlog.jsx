@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddBlog = () => {
   const navigate = useNavigate();
@@ -19,16 +20,45 @@ const AddBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(
-      "https://furniture-project-spox.onrender.com/admin/blogs",
-      {
-        ...data,
-        isPublished: true, // ✅ auto publish
-      }
-    );
+    try {
+      await axios.post(
+        "https://furniture-project-spox.onrender.com/admin/blogs",
+        {
+          ...data,
+          isPublished: true,
+        }
+      );
 
-    navigate("/admin/blogs");
+      Swal.fire({
+        icon: "success",
+        title: "Blog Published!",
+        text: "New blog added successfully",
+        confirmButtonColor: "#1e40af",
+      }).then(() => {
+        navigate("/admin/blogs");
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed!",
+        text: "Something went wrong. Try again.",
+      });
+    }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   await axios.post(
+  //     "https://furniture-project-spox.onrender.com/admin/blogs",
+  //     {
+  //       ...data,
+  //       isPublished: true,
+  //     }
+  //   );
+
+  //   navigate("/admin/blogs");
+  // };
 
   return (
     <div style={styles.page}>
