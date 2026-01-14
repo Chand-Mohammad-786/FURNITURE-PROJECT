@@ -42,12 +42,10 @@ const Header = () => {
   return (
     <nav className="custom-navbar navbar navbar-expand-md">
       <div className="container">
-        {/* LOGO */}
         <Link to="/" className="navbar-brand">
           Furni<span>.</span>
         </Link>
 
-        {/* MOBILE TOGGLE */}
         <button
           className="navbar-toggler"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -55,9 +53,7 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* MENU */}
         <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
-          {/* LEFT NAV */}
           <ul className="custom-navbar-nav navbar-nav ms-auto">
             {[
               ["Home", "/"],
