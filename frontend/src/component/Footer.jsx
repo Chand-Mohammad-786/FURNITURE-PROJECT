@@ -13,37 +13,8 @@ const Footer = () => {
           <div className="col-lg-8">
             <div className="subscription-form">
               <h3 className="d-flex align-items-center mb-3">
-                {/* <span className="me-1">
-                  <img
-                    src="/images/envelope-outline.svg"
-                    alt="Newsletter"
-                    className="img-fluid"
-                  />
-                </span> */}
                 <span>Subscribe to Newsletter</span>
               </h3>
-
-              <form className="row g-3">
-                {/* <div className="col-auto">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your name"
-                  />
-                </div> */}
-                {/* <div className="col-auto">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter your email"
-                  />
-                </div> */}
-                {/* <div className="col-auto">
-                  <button className="btn btn-primary" type="button">
-                    <span className="fa-solid fa-paper-plane"></span>
-                  </button>
-                </div> */}
-              </form>
             </div>
           </div>
         </div>
