@@ -261,8 +261,12 @@ export const trackOrder = async (req, res) => {
 export const updateOrderStatus = async (req, res) => {
   try {
     const { status, reason } = req.body;
+    const order = await Order.findById(req.params.id).populate(
+      "userId",
+      "email name"
+    );
 
-    const order = await Order.findById(req.params.id).populate("userId");
+    // const order = await Order.findById(req.params.id).populate("userId");
 
     if (!order) return res.status(404).json({ success: false });
 
@@ -276,7 +280,8 @@ export const updateOrderStatus = async (req, res) => {
       order.timeline.cancelledAt = new Date();
 
       // ✅ ALWAYS pick correct email
-      const userEmail = order.userId?.email || order.email;
+      // const userEmail = order.userId?.email || order.email;
+      const userEmail = order.userId?.email;
 
       if (userEmail) {
         await sendEmail({
