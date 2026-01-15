@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import dbConnect from "./connect/dbConnect.js";
 import fileUpload from "express-fileupload";
@@ -9,11 +11,13 @@ import http from "http";
 import { Server } from "socket.io";
 import path from "path";
 import { fileURLToPath } from "url";
-import dotenv from "dotenv";
+
 import contactRoutes from "./routes/contactRoutes.js";
+import { sendEmail } from "./utils/sendEmail.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 9696;
 // const port = 9696;
@@ -39,19 +43,6 @@ app.use(
   })
 );
 
-// app.use(
-//   cors({
-//     origin: [
-//       "http://localhost:3000",
-//       "http://localhost:4000",
-//       "https://furniture-project-w231.vercel.app",
-//       "https://furniture-project-spox.onrender.com",
-//     ],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
-
 app.use(fileUpload());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/user", userRouter);
@@ -75,19 +66,6 @@ const io = new Server(httpServer, {
   },
 });
 
-// const io = new Server(httpServer, {
-//   cors: {
-//     origin: [
-//       "http://localhost:3000",
-//       "http://localhost:4000",
-//       "https://furniture-project-w231.vercel.app",
-//       "https://furniture-project-spox.onrender.com",
-//     ],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   },
-// });
-
 app.set("io", io);
 export { io };
 io.on("connection", (socket) => {
@@ -96,6 +74,20 @@ io.on("connection", (socket) => {
     console.log("❌ Socket Disconnected:", socket.id);
   });
 });
+app.get("/test-email", async (req, res) => {
+  try {
+    await sendEmail({
+      to: "chand13695@gmail.com",
+      subject: "Test Email",
+      html: "<h2>Gmail SMTP Working Successfully</h2>",
+    });
+    res.send("Email sent");
+  } catch (err) {
+    console.error("Test email error:", err.message);
+    res.status(500).send("Email failed");
+  }
+});
+
 httpServer.listen(PORT, () => {
   // console.log(`🚀 Server running at http://localhost:${port}`);
   console.log(`🚀 Server running on port ${PORT}`);
