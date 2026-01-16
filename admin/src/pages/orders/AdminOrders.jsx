@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import socket from "../../socket";
+import API_BASE from "../../api";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -12,12 +13,9 @@ const AdminOrders = () => {
   /* ================= LOAD ORDERS ================= */
   const loadOrders = async () => {
     try {
-      const res = await axios.get(
-        "https://furniture-project-spox.onrender.com/admin/orders",
-        {
-          params: { range: filterRange },
-        }
-      );
+      const res = await axios.get(`${API_BASE}/admin/orders`, {
+        params: { range: filterRange },
+      });
       setOrders(res.data.orders || []);
     } catch (err) {
       console.error("Load orders error:", err);
@@ -53,7 +51,7 @@ const AdminOrders = () => {
     if (!reason) return;
 
     await axios.put(
-      `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+      `${API_BASE}/admin/orders/${id}`,
       {
         status: "Cancelled",
         reason,

@@ -151,7 +151,7 @@ const Homeproductsection = ({ showDynamic = false }) => {
 
                     <div className="mobile-product-info">
                       <h3>{p.name}</h3>
-                      <strong>₹{p.price}.00</strong>
+                      <strong>${p.price}.00</strong>
                     </div>
 
                     <div className="product-bg">
@@ -163,7 +163,7 @@ const Homeproductsection = ({ showDynamic = false }) => {
                         </ul>
                       </div>
                       <h3>{p.name}</h3>
-                      <strong>₹{p.price}.00</strong>
+                      <strong>${p.price}.00</strong>
                     </div>
 
                     <span
@@ -213,7 +213,7 @@ const Homeproductsection = ({ showDynamic = false }) => {
 
                   <div className="mobile-product-info">
                     <h3>{p.name}</h3>
-                    <strong>₹{p.price}.00</strong>
+                    <strong>${p.price}.00</strong>
                   </div>
 
                   <div className="product-bg">
@@ -227,7 +227,7 @@ const Homeproductsection = ({ showDynamic = false }) => {
                       </div>
                     )}
                     <h3>{p.name}</h3>
-                    <strong>₹{p.price}.00</strong>
+                    <strong>${p.price}.00</strong>
                   </div>
 
                   <span

@@ -1,5 +1,4 @@
 import Blog from "../model/blogSchema.js";
-
 // GET /admin/blogs
 export const getBlogs = async (req, res) => {
   const blogs = await Blog.find().sort({ createdAt: -1 });
@@ -27,7 +26,7 @@ export const createBlog = async (req, res) => {
       isPublished: Boolean(req.body.isPublished),
     });
 
-    io.emit("blog-updated"); // ✅ ADD THIS
+    io.emit("blogupdated"); // ✅ ADD THIS
 
     res.json({ success: true, blog: newBlog });
   } catch (err) {
@@ -42,7 +41,7 @@ export const updateBlog = async (req, res) => {
     new: true,
   });
 
-  io.emit("blog-updated"); // ✅
+  io.emit("blogupdated"); // ✅
   res.json({ success: true, blog: updated });
 };
 
@@ -51,7 +50,7 @@ export const deleteBlog = async (req, res) => {
   const io = req.app.get("io");
   await Blog.findByIdAndDelete(req.params.id);
 
-  io.emit("blog-updated"); // ✅
+  io.emit("blogupdated"); // ✅
   res.json({ success: true });
 };
 

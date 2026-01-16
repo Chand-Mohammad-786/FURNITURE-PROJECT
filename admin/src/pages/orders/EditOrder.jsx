@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import API_BASE from "../../api";
 
 const EditOrder = () => {
   const { id } = useParams();
@@ -15,12 +16,9 @@ const EditOrder = () => {
   /* ================= LOAD ORDER ================= */
   const loadOrder = async () => {
     try {
-      const res = await axios.get(
-        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await axios.get(`${API_BASE}/admin/orders/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       setOrder(res.data.order);
       setStatus(res.data.order.status);
@@ -39,7 +37,7 @@ const EditOrder = () => {
   const updateOrder = async () => {
     try {
       await axios.put(
-        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+        `${API_BASE}/admin/orders/${id}`,
         { status }, // ❌ no cancel logic here
         {
           headers: { Authorization: `Bearer ${token}` },

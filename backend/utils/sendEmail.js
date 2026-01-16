@@ -1,28 +1,22 @@
 import dotenv from "dotenv";
 dotenv.config();
-
 import nodemailer from "nodemailer";
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.log("❌ SMTP Connection Error:", error.message);
-  } else {
-    console.log("✅ SMTP Ready to send emails");
-  }
-});
 
 export const sendEmail = async ({ to, subject, html }) => {
   try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587, // 🔁 Changed from 465 → 587
+      secure: false, // 🔁 Must be false for 587
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false, // prevents Render TLS blocking
+      },
+    });
+
     const info = await transporter.sendMail({
       from: `"Furni Store" <${process.env.GMAIL_USER}>`,
       to,

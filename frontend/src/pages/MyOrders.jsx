@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { getToken, parseJwt } from "../utils/auth";
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ const MyOrders = () => {
   const [timeFilter, setTimeFilter] = useState("all");
 
   /* ================= LOAD ORDERS ================= */
-  const loadOrders = async () => {
+  const loadOrders = useCallback(async () => {
     try {
       const token = getToken();
       if (!token) return;
@@ -32,7 +32,27 @@ const MyOrders = () => {
       console.log("Load orders error:", err);
     }
     setLoading(false);
-  };
+  }, []);
+
+  // const loadOrders = async () => {
+  //   try {
+  //     const token = getToken();
+  //     if (!token) return;
+
+  //     const user = parseJwt(token);
+  //     const userId = user?._id || user?.id;
+  //     if (!userId) return;
+
+  //     const res = await axios.get(`${API_BASE}/user/orders/${userId}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+
+  //     setOrders(res.data.orders || []);
+  //   } catch (err) {
+  //     console.log("Load orders error:", err);
+  //   }
+  //   setLoading(false);
+  // };
 
   // useEffect(() => {
   //   loadOrders();
@@ -46,20 +66,34 @@ const MyOrders = () => {
   //   };
   // }, []);
   // Initial load
-  useEffect(() => {
-    loadOrders();
-  }, []);
+  // useEffect(() => {
+  //   loadOrders();
+  // }, []);
 
   // Live socket updates
+  // useEffect(() => {
+  //   socket.on("orderPlaced", loadOrders);
+  //   socket.on("orderStatusUpdated", loadOrders);
+
+  //   return () => {
+  //     socket.off("orderPlaced", loadOrders);
+  //     socket.off("orderStatusUpdated", loadOrders);
+  //   };
+  // }, []);
+
   useEffect(() => {
+    loadOrders();
+
     socket.on("orderPlaced", loadOrders);
     socket.on("orderStatusUpdated", loadOrders);
+    socket.on("orderRemoved", loadOrders);
 
     return () => {
       socket.off("orderPlaced", loadOrders);
       socket.off("orderStatusUpdated", loadOrders);
+      socket.off("orderRemoved", loadOrders);
     };
-  }, []);
+  }, [loadOrders]);
 
   /* ================= CANCEL ORDER ================= */
   const cancelOrder = async (id) => {
@@ -204,7 +238,7 @@ const MyOrders = () => {
               <div>
                 <b>{item.productName}</b>
                 <div>Qty: {item.quantity}</div>
-                <div>₹ {item.price}</div>
+                <div>${item.price}</div>
               </div>
             </div>
           ))}
@@ -231,7 +265,7 @@ const MyOrders = () => {
           )}
 
           <div className="mt-2">
-            <b>Total: ₹ {order.totalAmount}</b>
+            <b>Total: ${order.totalAmount}</b>
           </div>
 
           {/* ACTIONS */}

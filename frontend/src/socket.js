@@ -1,19 +1,18 @@
 import { io } from "socket.io-client";
 
 const socket = io("https://furniture-project-spox.onrender.com", {
-  transports: ["websocket"],
+  transports: ["polling", "websocket"],
   reconnection: true,
 });
 
 export default socket;
 
 // import { io } from "socket.io-client";
-
-// const SOCKET_URL = "http://localhost:9696";
-
-// const socket = io(SOCKET_URL, {
-//   transports: ["websocket"],
-//   autoConnect: true,
+// const socket = io("https://furniture-project-spox.onrender.com", {
+//   transports: ["polling", "websocket"],
+//   reconnection: true,
+//   reconnectionAttempts: Infinity,
+//   reconnectionDelay: 1000,
 // });
 
 // export default socket;

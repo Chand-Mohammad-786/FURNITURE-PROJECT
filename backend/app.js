@@ -20,24 +20,27 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 9696;
-// const port = 9696;
-console.log("Email service initialized");
 
-// console.log("EMAIL_USER:", process.env.EMAIL_USER);
-// console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "SET" : "NOT SET");
+console.log("Email service initialized");
 
 dbConnect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+/* ===== Allowed Origins ===== */
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:4000",
+  "http://192.168.1.7:3000",
+  "https://furniture-project-w231.vercel.app",
+  "https://furniture-project-spox.onrender.com",
+  "https://furniture-project-6d2z.vercel.app",
+];
+
+/* ===== Express CORS ===== */
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:4000",
-      "https://furniture-project-w231.vercel.app",
-      "https://furniture-project-spox.onrender.com",
-      "https://furniture-project-6d2z.vercel.app",
-    ],
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -45,22 +48,18 @@ app.use(
 
 app.use(fileUpload());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 app.use("/user", userRouter);
 app.use("/products", productRoutes);
 app.use("/admin", adminRouter);
 app.use("/api/contact", contactRoutes);
-// app.use("/api", userRouter);
 
+/* ===== HTTP + Socket Server ===== */
 const httpServer = http.createServer(app);
+
 const io = new Server(httpServer, {
   cors: {
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:4000",
-      "https://furniture-project-w231.vercel.app",
-      "https://furniture-project-spox.onrender.com",
-      "https://furniture-project-6d2z.vercel.app",
-    ],
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   },
@@ -68,12 +67,15 @@ const io = new Server(httpServer, {
 
 app.set("io", io);
 export { io };
+
 io.on("connection", (socket) => {
   console.log("⚡ Socket Connected:", socket.id);
   socket.on("disconnect", () => {
     console.log("❌ Socket Disconnected:", socket.id);
   });
 });
+
+/* ===== Test Email Route ===== */
 app.get("/test-email", async (req, res) => {
   try {
     await sendEmail({
@@ -88,7 +90,7 @@ app.get("/test-email", async (req, res) => {
   }
 });
 
+/* ===== Start Server ===== */
 httpServer.listen(PORT, () => {
-  // console.log(`🚀 Server running at http://localhost:${port}`);
   console.log(`🚀 Server running on port ${PORT}`);
 });

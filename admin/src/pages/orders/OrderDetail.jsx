@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import API_BASE from "../../api";
 
 const OrderDetail = () => {
   const { id } = useParams();
@@ -9,14 +10,11 @@ const OrderDetail = () => {
   /* ================= LOAD ORDER ================= */
   const loadOrder = async () => {
     try {
-      const res = await axios.get(
-        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-          },
-        }
-      );
+      const res = await axios.get(`${API_BASE}/admin/orders/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
       setOrder(res.data.order);
     } catch (err) {
       console.log("Admin order detail error:", err);
@@ -103,21 +101,8 @@ const OrderDetail = () => {
               <h5 style={{ marginBottom: "6px" }}>{item.productName}</h5>
               <div>Qty: {item.quantity}</div>
               <div>
-                <b>Order Price:</b> ₹{item.price}
+                <b>Order Price:</b> ${item.price}
               </div>
-              {/* {product && (
-                <>
-                  <hr style={{ margin: "8px 0" }} />
-
-                  <div>
-                    <b>Current Price:</b> ₹{product.price}
-                  </div>
-
-                  <div>
-                    <b>Description:</b> {product.description || "—"}
-                  </div>
-                </>
-              )} */}
             </div>
           </div>
         );

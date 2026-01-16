@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import API_BASE from "../../api";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -9,14 +10,11 @@ const OrderList = () => {
   /* ================= LOAD ORDERS ================= */
   const loadOrders = async () => {
     try {
-      const res = await axios.get(
-        "https://furniture-project-spox.onrender.com/admin/orders",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-          },
-        }
-      );
+      const res = await axios.get(`${API_BASE}/admin/orders`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
       setOrders(res.data.orders || []);
     } catch (err) {
       console.log("Orders load error:", err);
@@ -32,7 +30,7 @@ const OrderList = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+        `${API_BASE}/admin/orders/${id}`,
         { status }, // now hits correct backend controller
         {
           headers: {
@@ -60,14 +58,11 @@ const OrderList = () => {
     if (!window.confirm("Delete this order?")) return;
 
     try {
-      await axios.delete(
-        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-          },
-        }
-      );
+      await axios.delete(`${API_BASE}/admin/orders/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      });
       loadOrders();
     } catch (err) {
       console.log("Delete failed:", err);
@@ -208,7 +203,7 @@ const OrderList = () => {
                     onClick={() => deleteOrder(o._id)}
                     style={styles.deleteBtn}
                   >
-                    Delete
+                    Delete History
                   </button>
                 </td>
 

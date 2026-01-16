@@ -144,7 +144,7 @@ const ProductList = () => {
               <th style={thStyle}>Image</th>
               <th style={thStyle}>Name</th>
               <th style={thStyle}>Price</th>
-              <th style={thStyle}>Stock</th>
+              {/* <th style={thStyle}>Stock</th> */}
               {/* <th style={thStyle}>Category</th> */}
               <th style={thStyle}>Actions</th>
             </tr>
@@ -163,7 +163,7 @@ const ProductList = () => {
 
                 <td style={tdStyle}>{p.name}</td>
                 <td style={tdStyle}>${p.price}</td>
-                <td style={tdStyle}>{p.stock || 0}</td>
+                {/* <td style={tdStyle}>{p.stock || 0}</td> */}
                 {/* <td style={tdStyle}>{p.category || "—"}</td> */}
 
                 <td style={tdStyle}>

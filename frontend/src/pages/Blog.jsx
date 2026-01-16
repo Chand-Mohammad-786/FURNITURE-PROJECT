@@ -45,19 +45,24 @@ const Blog = () => {
 
   /* ================= ADMIN BLOGS ================= */
   const [adminBlogs, setAdminBlogs] = useState([]);
+  const loadBlogs = () => {
+    axios
+      .get(`${API_BASE}/admin/blogs/public`)
+      .then((res) => setAdminBlogs(res.data.blogs || []))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    const loadBlogs = () => {
-      axios
-        .get(`${API_BASE}/admin/blogs/public`)
-        .then((res) => setAdminBlogs(res.data.blogs || []))
-        .catch((err) => console.log(err));
-    };
-
     loadBlogs();
-    socket.on("blog-updated", loadBlogs);
 
-    return () => socket.off("blog-updated", loadBlogs);
+    socket.on("blogupdated", loadBlogs);
+
+    const interval = setInterval(loadBlogs, 5000);
+
+    return () => {
+      socket.off("blogupdated", loadBlogs);
+      clearInterval(interval);
+    };
   }, []);
 
   /* ================= MERGE BLOGS ================= */
@@ -93,9 +98,6 @@ const Blog = () => {
                   <Link to="/shop" className="btn btn-secondary me-2">
                     Shop Now
                   </Link>
-                  {/* <Link to="/shop" className="btn btn-white-outline">
-                    Explore
-                  </Link> */}
                 </p>
               </div>
             </div>
