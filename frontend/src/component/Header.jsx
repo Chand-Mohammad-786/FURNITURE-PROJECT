@@ -46,6 +46,7 @@ const Header = () => {
           Furni<span>.</span>
         </Link>
 
+        {/* MOBILE TOGGLE */}
         <button
           className="navbar-toggler"
           onClick={() => setMenuOpen(!menuOpen)}

@@ -32,14 +32,23 @@ const OrderList = () => {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `https://furniture-project-spox.onrender.com/admin/orders/update-status/${id}`,
-        { status },
+        `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
+        { status }, // now hits correct backend controller
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
         }
       );
+      // await axios.put(
+      //   `https://furniture-project-spox.onrender.com/admin/orders/update-status/${id}`,
+      //   { status },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+      //     },
+      //   }
+      // );
       loadOrders();
     } catch (err) {
       console.log("Status update failed:", err);

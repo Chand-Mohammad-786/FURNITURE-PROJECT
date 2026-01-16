@@ -280,8 +280,8 @@ export const updateOrderStatus = async (req, res) => {
       order.timeline.cancelledAt = new Date();
 
       // ✅ ALWAYS pick correct email
-      // const userEmail = order.userId?.email || order.email;
-      const userEmail = order.userId?.email;
+      const userEmail = order.userId?.email || order.email;
+      // const userEmail = order.userId?.email;
 
       if (userEmail) {
         await sendEmail({
