@@ -6,8 +6,6 @@ import {
   FaBoxOpen,
   FaUsers,
   FaShoppingCart,
-  FaImage,
-  FaHome,
   FaCog,
   FaUserShield,
   FaEnvelope,
