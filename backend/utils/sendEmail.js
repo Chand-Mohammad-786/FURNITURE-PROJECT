@@ -1,33 +1,29 @@
-import dotenv from "dotenv";
-dotenv.config();
 import nodemailer from "nodemailer";
 
 export const sendEmail = async ({ to, subject, html }) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587, // 🔁 Changed from 465 → 587
-      secure: false, // 🔁 Must be false for 587
+      host: "smtp-relay.brevo.com",
+      port: 587,
+      secure: false, // must be false for port 587
+      requireTLS: true, // ✅ THIS LINE IS IMPORTANT
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false, // prevents Render TLS blocking
+        user: process.env.BREVO_USER,
+        pass: process.env.BREVO_API_KEY,
       },
     });
 
-    const info = await transporter.sendMail({
-      from: `"Furni Store" <${process.env.GMAIL_USER}>`,
+    await transporter.sendMail({
+      from: `"Furni Store" <${process.env.BREVO_USER}>`,
       to,
       subject,
       html,
     });
 
-    console.log("✅ Email sent:", info.messageId);
+    console.log("✅ Email sent");
     return true;
   } catch (error) {
-    console.error("❌ Email sending failed:", error.message);
+    console.error("❌ Email failed:", error);
     return false;
   }
 };
