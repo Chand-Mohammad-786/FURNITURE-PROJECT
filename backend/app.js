@@ -50,11 +50,16 @@ app.use(
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
 
-      if (origin.includes("vercel.app") || origin.includes("localhost")) {
+      if (
+        origin.includes("vercel.app") ||
+        origin.includes("localhost") ||
+        origin.includes("onrender.com")
+      ) {
         return callback(null, true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
+      // ❗ No error throw — just allow
+      return callback(null, true);
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
@@ -84,11 +89,15 @@ const io = new Server(httpServer, {
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
 
-      if (origin.includes("vercel.app") || origin.includes("localhost")) {
+      if (
+        origin.includes("vercel.app") ||
+        origin.includes("localhost") ||
+        origin.includes("onrender.com")
+      ) {
         return callback(null, true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
+      return callback(null, true);
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
