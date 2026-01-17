@@ -35,6 +35,7 @@ const allowedOrigins = [
   "https://furniture-project-w231.vercel.app",
   "https://furniture-project-spox.onrender.com",
   "https://furniture-project-6d2z.vercel.app",
+  "https://furniture-project-admin-5xnaadvy4-chand-mohammads-projects.vercel.app",
 ];
 
 /* ===== Express CORS ===== */
