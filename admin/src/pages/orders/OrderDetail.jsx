@@ -23,6 +23,7 @@ const OrderDetail = () => {
 
   useEffect(() => {
     loadOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (!order) return <h4>Loading…</h4>;

@@ -18,7 +18,7 @@ const ProductList = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
-        }
+        },
       );
       setProducts(res.data.products || []);
     } catch (err) {
@@ -40,7 +40,7 @@ const ProductList = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
-        }
+        },
       );
     } catch (err) {
       console.log("Delete failed", err);
@@ -54,6 +54,7 @@ const ProductList = () => {
     socket.on("productChanged", loadProducts);
 
     return () => socket.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <p>Loading products...</p>;

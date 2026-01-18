@@ -15,7 +15,7 @@ const UserList = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       setUsers(res.data?.users || []);
@@ -35,7 +35,7 @@ const UserList = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       setUsers((prev) => prev.filter((u) => u._id !== id));
@@ -62,6 +62,7 @@ const UserList = () => {
         socket.off("user_created");
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 🔹 Button base style

@@ -16,7 +16,7 @@ const EditBlog = () => {
   const loadBlog = async () => {
     try {
       const res = await axios.get(
-        `https://furniture-project-spox.onrender.com/admin/blogs/${id}`
+        `https://furniture-project-spox.onrender.com/admin/blogs/${id}`,
       );
       const blog = res.data.blog;
 
@@ -33,6 +33,7 @@ const EditBlog = () => {
 
   useEffect(() => {
     loadBlog();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = async (e) => {
@@ -46,7 +47,7 @@ const EditBlog = () => {
           category: data.category,
           content: data.content,
           image: data.image, // ✅ URL only
-        }
+        },
       );
 
       navigate("/admin/blogs");

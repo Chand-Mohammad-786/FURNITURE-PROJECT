@@ -9,7 +9,7 @@ const ContactMessages = () => {
   const loadMessages = async () => {
     try {
       const res = await axios.get(
-        "https://furniture-project-spox.onrender.com/api/contact"
+        "https://furniture-project-spox.onrender.com/api/contact",
       );
       setMessages(res.data);
     } catch (err) {
@@ -29,6 +29,7 @@ const ContactMessages = () => {
     return () => {
       socket.off("newContactMessage");
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ✅ DATE FILTER LOGIC

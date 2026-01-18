@@ -21,7 +21,7 @@ const EditUser = () => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
@@ -45,6 +45,7 @@ const EditUser = () => {
         console.error("User load error:", err);
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleChange = (e) => {
@@ -66,7 +67,7 @@ const EditUser = () => {
           id,
           ...data,
         }),
-      }
+      },
     );
 
     navigate("/admin/users");

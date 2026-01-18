@@ -35,6 +35,7 @@ const AdminOrders = () => {
       socket.off("orderStatusUpdated", loadOrders);
       socket.off("orderRemoved", loadOrders);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterRange]);
 
   /* ================= CANCEL ORDER ================= */

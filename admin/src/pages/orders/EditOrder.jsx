@@ -31,6 +31,7 @@ const EditOrder = () => {
 
   useEffect(() => {
     loadOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   /* ================= UPDATE ORDER ================= */
@@ -41,7 +42,7 @@ const EditOrder = () => {
         { status }, // ❌ no cancel logic here
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       Swal.fire("Success", "Order updated successfully", "success");
