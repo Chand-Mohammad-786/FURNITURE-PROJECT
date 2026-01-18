@@ -91,6 +91,7 @@ const Aboutus = () => {
                 <img
                   src="images/person_2.jpg"
                   className="img-fluid mb-4 team-img"
+                  alt=""
                 />
                 <h3 className="team-name">
                   <Link to="#">
@@ -116,6 +117,7 @@ const Aboutus = () => {
                 <img
                   src="images/person_3.jpg"
                   className="img-fluid mb-4 team-img"
+                  alt=""
                 />
                 <h3 className="team-name">
                   <Link to="#">
@@ -141,6 +143,7 @@ const Aboutus = () => {
                 <img
                   src="images/person_4.jpg"
                   className="img-fluid mb-4 team-img"
+                  alt=""
                 />
                 <h3 className="team-name">
                   <Link to="#">
