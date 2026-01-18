@@ -110,12 +110,12 @@ export const placeOrder = async (req, res) => {
               product?.color || item.color || item.productSnapshot?.color || "",
           },
         };
-      })
+      }),
     );
 
     const calculatedTotal = updatedItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
-      0
+      0,
     );
 
     /* ================= CREATE ORDER ================= */
@@ -226,7 +226,7 @@ export const cancelOrder = async (req, res) => {
           <p><b>Reason:</b> Cancelled by you</p>
         `,
       }).catch((err) =>
-        console.error("Cancel order email failed:", err.message)
+        console.error("Cancel order email failed:", err.message),
       );
     }
 
@@ -263,7 +263,7 @@ export const updateOrderStatus = async (req, res) => {
     const { status, reason } = req.body;
     const order = await Order.findById(req.params.id).populate(
       "userId",
-      "email name"
+      "email name",
     );
 
     // const order = await Order.findById(req.params.id).populate("userId");
@@ -279,8 +279,7 @@ export const updateOrderStatus = async (req, res) => {
       order.cancelReason = reason || "Cancelled by seller";
       order.timeline.cancelledAt = new Date();
 
-      // ✅ ALWAYS pick correct email
-      const userEmail = order.userId?.email || order.email;
+      let userEmail = order.userId?.email || order.email;
       // const userEmail = order.userId?.email;
 
       if (userEmail) {
