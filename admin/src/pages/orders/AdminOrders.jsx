@@ -60,7 +60,7 @@ const AdminOrders = () => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
-      }
+      },
     );
 
     Swal.fire("Cancelled!", "Order cancelled successfully", "success");
@@ -214,6 +214,22 @@ const AdminOrders = () => {
                 Cancel
               </button>
             )}
+            <button
+              className="btn btn-outline-danger"
+              onClick={async () => {
+                if (!window.confirm("Remove this order history?")) return;
+
+                await axios.delete(`${API_BASE}/admin/orders/${order._id}`, {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+                  },
+                });
+
+                loadOrders();
+              }}
+            >
+              Remove History
+            </button>
           </div>
         </div>
       ))}

@@ -36,7 +36,7 @@ const OrderList = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
-        }
+        },
       );
       // await axios.put(
       //   `https://furniture-project-spox.onrender.com/admin/orders/update-status/${id}`,

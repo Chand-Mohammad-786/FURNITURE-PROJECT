@@ -107,7 +107,7 @@ const MyOrders = () => {
       await axios.put(
         `${API_BASE}/user/orders/cancel/${id}`,
         {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       await loadOrders();
@@ -210,7 +210,7 @@ const MyOrders = () => {
 
             <span
               className={`badge d-flex align-items-center justify-content-center ${getStatusBadge(
-                order.status
+                order.status,
               )}`}
               style={{ height: "30px", minWidth: "100px" }}
             >

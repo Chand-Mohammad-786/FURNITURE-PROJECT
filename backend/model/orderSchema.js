@@ -44,7 +44,14 @@ const orderSchema = new mongoose.Schema(
     // Status.
     status: {
       type: String,
-      enum: ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
+      enum: [
+        "Pending",
+        "Processing",
+        "Shipped",
+        "OutForDelivery",
+        "Delivered",
+        "Cancelled",
+      ],
       default: "Pending",
     },
     //  Address.
@@ -75,6 +82,6 @@ const orderSchema = new mongoose.Schema(
       default: "",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 export default mongoose.model("order", orderSchema);

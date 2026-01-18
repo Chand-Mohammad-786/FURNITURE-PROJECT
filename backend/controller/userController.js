@@ -97,7 +97,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
 
     return res.json({
@@ -213,7 +213,7 @@ export const userUpdate = async (req, res) => {
     const data = await userDataSchema.findByIdAndUpdate(
       req.params.id,
       updateData,
-      { new: true }
+      { new: true },
     );
 
     if (!data) {
@@ -360,7 +360,7 @@ export const resetPassword = async (req, res) => {
     const user = await userDataSchema.findOneAndUpdate(
       { email },
       { password: encPass },
-      { new: true }
+      { new: true },
     );
 
     if (!user) {
