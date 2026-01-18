@@ -1,39 +1,28 @@
-import nodemailer from "nodemailer";
-
-let transporter;
-
-const createTransporter = () => {
-  if (transporter) return transporter;
-
-  transporter = nodemailer.createTransport({
-    host: "smtp-relay.brevo.com",
-    port: 587,
-    secure: false,
-    requireTLS: true,
-    auth: {
-      user: process.env.BREVO_USER,
-      pass: process.env.BREVO_API_KEY,
-    },
-  });
-
-  return transporter;
-};
-
+import axios from "axios";
 export const sendEmail = async ({ to, subject, html }) => {
   try {
-    const mailer = createTransporter();
-
-    await mailer.sendMail({
-      from: `"Furni Store" <${process.env.BREVO_USER}>`,
-      to,
-      subject,
-      html,
-    });
-
-    console.log("✅ Email sent to:", to);
+    await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        sender: {
+          name: "Furni Store",
+          email: process.env.BREVO_SENDER, // 👈 IMPORTANT
+        },
+        to: [{ email: to }],
+        subject,
+        htmlContent: html,
+      },
+      {
+        headers: {
+          "api-key": process.env.BREVO_API_KEY,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    console.log("✅ Email sent");
     return true;
-  } catch (error) {
-    console.error("❌ Email failed:", error.message);
+  } catch (err) {
+    console.log("❌ Email failed:", err.response?.data || err.message);
     return false;
   }
 };
