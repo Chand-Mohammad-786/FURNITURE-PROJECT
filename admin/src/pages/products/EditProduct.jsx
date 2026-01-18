@@ -33,6 +33,7 @@ const EditProduct = () => {
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   /* ================= HANDLE INPUT ================= */
@@ -50,7 +51,7 @@ const EditProduct = () => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
-      }
+      },
     );
 
     navigate("/admin/products");

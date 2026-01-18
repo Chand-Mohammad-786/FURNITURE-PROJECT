@@ -146,7 +146,7 @@ const BlogList = () => {
   const loadBlogs = async () => {
     try {
       const res = await axios.get(
-        "https://furniture-project-spox.onrender.com/admin/blogs"
+        "https://furniture-project-spox.onrender.com/admin/blogs",
       );
       setBlogs(res.data.blogs || []);
     } catch (error) {
@@ -157,13 +157,14 @@ const BlogList = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this blog?")) return;
     await axios.delete(
-      `https://furniture-project-spox.onrender.com/admin/blogs/${id}`
+      `https://furniture-project-spox.onrender.com/admin/blogs/${id}`,
     );
     loadBlogs();
   };
 
   useEffect(() => {
     loadBlogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -205,8 +206,8 @@ const BlogList = () => {
                           blog.image?.startsWith("http")
                             ? blog.image
                             : blog.image
-                            ? `https://furniture-project-spox.onrender.com/uploads/${blog.image}`
-                            : "https://via.placeholder.com/60"
+                              ? `https://furniture-project-spox.onrender.com/uploads/${blog.image}`
+                              : "https://via.placeholder.com/60"
                         }
                         alt=""
                         style={styles.img}

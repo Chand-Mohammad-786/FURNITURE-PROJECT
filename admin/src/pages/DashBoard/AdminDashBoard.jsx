@@ -9,7 +9,7 @@ const AdminDashBoard = () => {
   const fetchStats = async () => {
     try {
       const res = await axios.get(
-        "https://furniture-project-spox.onrender.com/admin/dashboard"
+        "https://furniture-project-spox.onrender.com/admin/dashboard",
       );
       if (res.data?.success) {
         setStats(res.data.stats || {});
@@ -33,6 +33,7 @@ const AdminDashBoard = () => {
       socket.off("orderRemoved", fetchStats);
       socket.off("orderStatusUpdated", fetchStats);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <p>Loading dashboard...</p>;
