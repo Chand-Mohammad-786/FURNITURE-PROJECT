@@ -73,17 +73,13 @@ app.use("/user", userRouter);
 app.use("/products", productRoutes);
 app.use("/admin", adminRouter);
 app.use("/api/contact", contactRoutes);
+app.get("/ping", (req, res) => {
+  res.send("Server alive");
+});
 
 /* ===== HTTP + Socket Server ===== */
 const httpServer = http.createServer(app);
 
-// const io = new Server(httpServer, {
-//   cors: {
-//     origin: allowedOrigins,
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   },
-// });
 const io = new Server(httpServer, {
   cors: {
     origin: (origin, callback) => {
