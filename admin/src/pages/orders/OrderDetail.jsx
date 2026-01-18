@@ -72,8 +72,6 @@ const OrderDetail = () => {
       <h4 className="mt-3">Items</h4>
 
       {order.items.map((item, i) => {
-        // const product = item.productId;
-
         return (
           <div
             key={i}
