@@ -3,7 +3,6 @@ import Order from "../model/orderSchema.js";
 import Product from "../model/productSchema.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import User from "../model/userSchema.js";
-
 /* ===================== UTILITIES ===================== */
 
 const generateTrackingNumber = () =>
@@ -31,7 +30,6 @@ const buildImageUrl = (imagePath) => {
 
 const transformOrderForResponse = (orderDoc) => {
   if (!orderDoc) return null;
-
   const order =
     typeof orderDoc.toObject === "function" ? orderDoc.toObject() : orderDoc;
 
@@ -266,8 +264,6 @@ export const updateOrderStatus = async (req, res) => {
       "email name",
     );
 
-    // const order = await Order.findById(req.params.id).populate("userId");
-
     if (!order) return res.status(404).json({ success: false });
 
     order.status = status;
@@ -280,7 +276,6 @@ export const updateOrderStatus = async (req, res) => {
       order.timeline.cancelledAt = new Date();
 
       let userEmail = order.userId?.email || order.email;
-      // const userEmail = order.userId?.email;
 
       if (userEmail) {
         await sendEmail({
@@ -309,46 +304,6 @@ export const updateOrderStatus = async (req, res) => {
     return res.status(500).json({ success: false });
   }
 };
-
-// export const updateOrderStatus = async (req, res) => {
-//   try {
-//     const { status, reason } = req.body;
-
-//     const order = await Order.findById(req.params.id).populate("userId");
-//     if (!order) return res.status(404).json({ success: false });
-
-//     order.status = status;
-//     order.timeline = order.timeline || {};
-
-//     if (status === "Cancelled") {
-//       order.cancelledBy = "admin";
-//       order.cancelReason = reason || "Cancelled by seller";
-//       order.timeline.cancelledAt = new Date();
-
-//       const userEmail = order.userId?.email || order.email;
-//       if (userEmail) {
-//         await sendEmail({
-//           to: userEmail,
-//           subject: "Your Order Has Been Cancelled",
-//           html: `
-//             <h2>Order Cancelled by Admin</h2>
-//             <p>Hello <b>${order.userId?.name || "Customer"}</b>,</p>
-//             <p>Your order <b>#${order._id}</b> has been cancelled.</p>
-//             <p><b>Reason:</b> ${order.cancelReason}</p>
-//           `,
-//         });
-//       }
-//     }
-
-//     await order.save();
-//     req.app.get("io")?.emit("orderStatusUpdated", order);
-
-//     return res.json({ success: true });
-//   } catch (err) {
-//     console.error("updateOrderStatus error:", err);
-//     return res.status(500).json({ success: false });
-//   }
-// };
 
 /* ===================== ANALYTICS & DASHBOARD ===================== */
 

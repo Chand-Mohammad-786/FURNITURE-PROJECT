@@ -29,7 +29,7 @@ const AddProduct = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
-        }
+        },
       );
 
       // ✅ SweetAlert Success

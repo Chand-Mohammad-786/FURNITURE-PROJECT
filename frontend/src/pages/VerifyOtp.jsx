@@ -9,7 +9,6 @@ const VerifyOtp = () => {
   const { state } = useLocation();
   const [otp, setOtp] = useState("");
 
-  // If user comes without email, send them back
   if (!state?.email) {
     navigate("/forgot-password");
     return null;
@@ -29,13 +28,6 @@ const VerifyOtp = () => {
         email: state.email,
         otp,
       });
-      // const res = await axios.post(
-      //   "https://furniture-project-spox.onrender.com/user/verify-otp",
-      //   {
-      //     email: state.email,
-      //     otp,
-      //   }
-      // );
 
       if (res.data.status === 400) {
         toast.error(res.data.message);
@@ -59,7 +51,7 @@ const VerifyOtp = () => {
         placeholder="Enter 6-digit OTP"
         maxLength={6}
         value={otp}
-        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))} // only digits
+        onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
         style={{ marginBottom: "15px" }}
       />
 

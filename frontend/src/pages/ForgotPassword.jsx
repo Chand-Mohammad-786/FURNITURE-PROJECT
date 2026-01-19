@@ -35,6 +35,7 @@ const ForgotPassword = () => {
         toast.success("OTP sent to your email");
         navigate("/verify-otp", { state: { email: trimmedEmail } });
       }
+      toast.info("Forgot password feature will be enabled soon");
     } catch (error) {
       toast.error("Something went wrong!");
     } finally {

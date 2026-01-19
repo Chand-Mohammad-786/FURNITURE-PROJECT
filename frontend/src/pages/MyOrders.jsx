@@ -34,53 +34,6 @@ const MyOrders = () => {
     setLoading(false);
   }, []);
 
-  // const loadOrders = async () => {
-  //   try {
-  //     const token = getToken();
-  //     if (!token) return;
-
-  //     const user = parseJwt(token);
-  //     const userId = user?._id || user?.id;
-  //     if (!userId) return;
-
-  //     const res = await axios.get(`${API_BASE}/user/orders/${userId}`, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-
-  //     setOrders(res.data.orders || []);
-  //   } catch (err) {
-  //     console.log("Load orders error:", err);
-  //   }
-  //   setLoading(false);
-  // };
-
-  // useEffect(() => {
-  //   loadOrders();
-
-  //   socket.on("orderPlaced", loadOrders);
-  //   socket.on("orderStatusUpdated", loadOrders);
-
-  //   return () => {
-  //     socket.off("orderPlaced", loadOrders);
-  //     socket.off("orderStatusUpdated", loadOrders);
-  //   };
-  // }, []);
-  // Initial load
-  // useEffect(() => {
-  //   loadOrders();
-  // }, []);
-
-  // Live socket updates
-  // useEffect(() => {
-  //   socket.on("orderPlaced", loadOrders);
-  //   socket.on("orderStatusUpdated", loadOrders);
-
-  //   return () => {
-  //     socket.off("orderPlaced", loadOrders);
-  //     socket.off("orderStatusUpdated", loadOrders);
-  //   };
-  // }, []);
-
   useEffect(() => {
     loadOrders();
 
@@ -142,9 +95,6 @@ const MyOrders = () => {
   const filteredOrders = useMemo(() => {
     return orders.filter((o) => isWithinRange(o.createdAt));
   }, [orders, timeFilter]);
-
-  // const filteredOrders = orders.filter((o) => isWithinRange(o.createdAt));
-
   /* ================= STATUS BADGE ================= */
   const getStatusBadge = (status) => {
     switch (status) {

@@ -37,15 +37,6 @@ const ResetPassword = () => {
         email: state.email,
         password: pass,
       });
-
-      // const res = await axios.post(
-      //   "https://furniture-project-spox.onrender.com/user/reset-password",
-      //   {
-      //     email: state.email,
-      //     password: pass,
-      //   }
-      // );
-
       if (res.data.status === 400) {
         toast.error(res.data.message);
       } else {

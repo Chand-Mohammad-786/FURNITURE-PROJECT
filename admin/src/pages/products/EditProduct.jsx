@@ -13,7 +13,7 @@ const EditProduct = () => {
     stock: "",
     category: "",
     image: "",
-    description: "", // ✅ ADDED
+    description: "",
   });
 
   const [loading, setLoading] = useState(true);

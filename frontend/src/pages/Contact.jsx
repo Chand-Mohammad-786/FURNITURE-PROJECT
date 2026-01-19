@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Hometestimonialsection from "./Hometestimonialsection";
 import API_BASE from "../api.js";
-
 /* ===== INFO ITEM ===== */
 const InfoItem = ({ icon, text }) => (
   <div className="d-flex align-items-start gap-3">

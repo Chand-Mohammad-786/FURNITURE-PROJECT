@@ -10,7 +10,7 @@ const blogSchema = new mongoose.Schema(
     image: { type: String, default: "" },
     isPublished: { type: Boolean, default: false },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Blog = mongoose.model("blog", blogSchema);

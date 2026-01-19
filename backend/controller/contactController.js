@@ -8,7 +8,7 @@ export const sendMessage = async (req, res) => {
       return res.status(400).json({ message: "Required fields missing" });
     }
 
-    // ✅ Save message
+    // Save message
     const newMessage = await Contact.create({
       firstName,
       lastName,
@@ -17,7 +17,6 @@ export const sendMessage = async (req, res) => {
       message,
     });
 
-    // ✅ REAL-TIME NOTIFY ADMIN PANEL
     const io = req.app.get("io");
     if (io) {
       io.emit("newContactMessage", newMessage);

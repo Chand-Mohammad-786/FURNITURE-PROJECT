@@ -10,22 +10,18 @@ import {
   FaUserShield,
   FaEnvelope,
 } from "react-icons/fa";
-
 const Sidebar = ({ open, onClose }) => {
   const handleNavClick = () => {
     if (window.innerWidth <= 768) {
       onClose();
     }
   };
-
   /* ================== INLINE STYLES ================== */
-
   const navStyle = {
     display: "flex",
     flexDirection: "column",
     gap: "2px",
   };
-
   const linkStyle = {
     display: "flex",
     alignItems: "center",
@@ -40,14 +36,11 @@ const Sidebar = ({ open, onClose }) => {
     overflow: "hidden",
     textOverflow: "ellipsis",
   };
-
   const iconStyle = {
     fontSize: "15px",
     minWidth: "16px",
   };
-
   /* ================== ADMIN HEADER ================== */
-
   const adminWrapper = {
     display: "flex",
     flexDirection: "column",
@@ -55,23 +48,19 @@ const Sidebar = ({ open, onClose }) => {
     marginTop: "10px",
     marginBottom: "18px",
   };
-
   const adminIconStyle = {
     fontSize: "72px",
     marginBottom: "6px",
   };
-
   const adminNameStyle = {
     fontSize: "15px",
     fontWeight: "600",
     margin: 0,
   };
-
   const adminRoleStyle = {
     fontSize: "12px",
     color: "#aaa",
   };
-
   return (
     <>
       {open && <div className="overlay" onClick={onClose} />}
@@ -129,5 +118,4 @@ const Sidebar = ({ open, onClose }) => {
     </>
   );
 };
-
 export default Sidebar;

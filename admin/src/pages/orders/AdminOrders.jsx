@@ -7,8 +7,8 @@ import API_BASE from "../../api";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [filterRange, setFilterRange] = useState("30"); // last 30 days
-  const [statusFilter, setStatusFilter] = useState("all"); // status filter
+  const [filterRange, setFilterRange] = useState("30");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   /* ================= LOAD ORDERS ================= */
   const loadOrders = async () => {
@@ -67,27 +67,6 @@ const AdminOrders = () => {
     Swal.fire("Cancelled!", "Order cancelled successfully", "success");
     loadOrders();
   };
-
-  // const cancelOrder = async (id) => {
-  //   const { value: reason } = await Swal.fire({
-  //     title: "Cancel Order",
-  //     input: "textarea",
-  //     inputLabel: "Cancel Reason",
-  //     showCancelButton: true,
-  //     confirmButtonText: "Confirm Cancel",
-  //     confirmButtonColor: "#dc2626",
-  //   });
-
-  //   if (!reason) return;
-
-  //   await axios.put(
-  //     `https://furniture-project-spox.onrender.com/admin/orders/${id}`,
-  //     {
-  //       status: "Cancelled",
-  //       reason,
-  //     }
-  //   );
-  // };
 
   /* ================= STATUS COLOR ================= */
   const statusColor = (status) => {

@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
     otp: { type: String, default: null },
     otpExpire: { type: Date, default: null },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 const userDataSchema = mongoose.model("user", userSchema);
 export default userDataSchema;

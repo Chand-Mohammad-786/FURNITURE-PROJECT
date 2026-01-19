@@ -27,11 +27,6 @@ const Signup = () => {
 
       const response = await axios.post(`${API_BASE}/user/signup`, data);
 
-      // const response = await axios.post(
-      //   "https://furniture-project-spox.onrender.com/user/signup",
-      //   data
-      // );
-
       if (response.data.status === 400) {
         toast.error(response.data.message);
       } else {

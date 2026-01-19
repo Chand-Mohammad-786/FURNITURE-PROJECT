@@ -105,7 +105,7 @@ const AdminSettings = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
           },
-        }
+        },
       );
 
       setMsg(res.data.message || "Updated successfully");

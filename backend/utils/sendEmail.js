@@ -19,10 +19,10 @@ export const sendEmail = async ({ to, subject, html }) => {
         },
       },
     );
-    console.log("✅ Email sent");
+    console.log("Email sent");
     return true;
   } catch (err) {
-    console.log("❌ Email failed:", err.response?.data || err.message);
+    console.log("Email failed:", err.response?.data || err.message);
     return false;
   }
 };

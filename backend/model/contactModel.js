@@ -16,7 +16,7 @@ const contactSchema = new mongoose.Schema(
       default: "New",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("Contact", contactSchema);

@@ -11,7 +11,6 @@ import http from "http";
 import { Server } from "socket.io";
 import path from "path";
 import { fileURLToPath } from "url";
-
 import contactRoutes from "./routes/contactRoutes.js";
 import { sendEmail } from "./utils/sendEmail.js";
 
@@ -37,14 +36,6 @@ const allowedOrigins = [
   "https://furniture-project-admin-5xnaadvy4-chand-mohammads-projects.vercel.app",
 ];
 
-/* ===== Express CORS ===== */
-// app.use(
-//   cors({
-//     origin: allowedOrigins,
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -58,7 +49,6 @@ app.use(
         return callback(null, true);
       }
 
-      // ❗ No error throw — just allow
       return callback(null, true);
     },
     methods: ["GET", "POST", "PUT", "DELETE"],

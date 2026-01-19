@@ -21,7 +21,7 @@ const UserList = () => {
       setUsers(res.data?.users || []);
     } catch (err) {
       console.error("Load users error:", err);
-      setUsers([]); // 🔥 prevents UI crash
+      setUsers([]);
     }
   };
 
@@ -47,7 +47,7 @@ const UserList = () => {
   useEffect(() => {
     loadUsers();
 
-    // 🔥 SAFE SOCKET LISTENER
+    //SAFE SOCKET LISTENER
     if (socket) {
       socket.on("user_created", (newUser) => {
         setUsers((prev) => {

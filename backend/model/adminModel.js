@@ -9,6 +9,6 @@ const adminSchema = new mongoose.Schema(
     pendingEmail: String,
     pendingPassword: String,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 export default mongoose.model("Admin", adminSchema);

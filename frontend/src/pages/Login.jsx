@@ -25,11 +25,6 @@ const Login = () => {
     try {
       const response = await axios.post(`${API_BASE}/user/login`, data);
 
-      // const response = await axios.post(
-      //   "https://furniture-project-spox.onrender.com/user/login",
-      //   data
-      // );
-
       if (!response.data.success) {
         toast.error(response.data.message);
         return;
@@ -58,8 +53,8 @@ const Login = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        padding: "20px 16px 0", // ❌ no bottom padding
-        marginBottom: "-16px", // ✅ kills white gap before newsletter
+        padding: "20px 16px 0",
+        marginBottom: "-16px",
       }}
     >
       {/* ===== LOGIN CARD ===== */}
@@ -76,7 +71,7 @@ const Login = () => {
         <form
           onSubmit={handleSubmit}
           autoComplete="off"
-          style={{ marginBottom: 0 }} // ✅ important
+          style={{ marginBottom: 0 }}
         >
           <div className="mb-2">
             <label>Email / Phone</label>

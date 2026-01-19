@@ -46,7 +46,7 @@ const EditBlog = () => {
           title: data.title,
           category: data.category,
           content: data.content,
-          image: data.image, // ✅ URL only
+          image: data.image, //  URL only
         },
       );
 

@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
 const AddBlog = () => {
   const navigate = useNavigate();
-
   const [data, setData] = useState({
     title: "",
     category: "",
     content: "",
     image: "",
   });
-
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -26,7 +23,7 @@ const AddBlog = () => {
         {
           ...data,
           isPublished: true,
-        }
+        },
       );
 
       Swal.fire({
@@ -45,20 +42,6 @@ const AddBlog = () => {
       });
     }
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   await axios.post(
-  //     "https://furniture-project-spox.onrender.com/admin/blogs",
-  //     {
-  //       ...data,
-  //       isPublished: true,
-  //     }
-  //   );
-
-  //   navigate("/admin/blogs");
-  // };
 
   return (
     <div style={styles.page}>

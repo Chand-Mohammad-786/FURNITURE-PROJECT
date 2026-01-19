@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const AdminLogin = () => {
   const navigate = useNavigate();
 
-  // const [data, setData] = useState({ email: "", password: "" });
   const [data, setData] = useState({ email: "", password: "" });
 
   const [error, setError] = useState("");
@@ -28,7 +27,7 @@ const AdminLogin = () => {
         data,
         {
           headers: { "Content-Type": "application/json" },
-        }
+        },
       );
 
       if (res.data.token) {

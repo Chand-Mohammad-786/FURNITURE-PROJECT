@@ -39,15 +39,7 @@ const OrderList = () => {
           },
         },
       );
-      // await axios.put(
-      //   `https://furniture-project-spox.onrender.com/admin/orders/update-status/${id}`,
-      //   { status },
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-      //     },
-      //   }
-      // );
+
       loadOrders();
     } catch (err) {
       console.log("Status update failed:", err);

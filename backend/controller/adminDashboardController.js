@@ -9,12 +9,12 @@ export const getAdminStats = async (req, res) => {
     const totalProducts = await Product.countDocuments();
     const totalBlogs = await Blog.countDocuments();
 
-    // ✅ TOTAL ORDERS (Cancelled exclude)
+    //  TOTAL ORDERS (Cancelled exclude)
     const totalOrders = await Order.countDocuments({
       status: { $ne: "Cancelled" },
     });
 
-    // ✅ TOTAL REVENUE
+    //  TOTAL REVENUE
     const revenueAgg = await Order.aggregate([
       { $match: { status: { $ne: "Cancelled" } } },
       {
@@ -45,8 +45,8 @@ export const getAdminStats = async (req, res) => {
         totalUsers,
         totalProducts,
         totalBlogs,
-        totalOrders, // ✅ FIXED
-        totalRevenue, // ✅ FIXED
+        totalOrders,
+        totalRevenue,
         latestUsers,
         latestProducts,
       },

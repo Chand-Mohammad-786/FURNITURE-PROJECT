@@ -75,19 +75,6 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-// export const updateProduct = async (req, res) => {
-//   try {
-//     await Product.findByIdAndUpdate(req.params.id, req.body);
-
-//     const io = req.app.get("io");
-//     io.emit("productChanged");
-
-//     res.json({ success: true });
-//   } catch {
-//     res.json({ success: false });
-//   }
-// };
-
 // ================= DELETE PRODUCT =================
 export const deleteProduct = async (req, res) => {
   try {

@@ -1,14 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 const Navbar = ({ onToggle }) => {
   const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
     navigate("/admin/login");
   };
-
   return (
     <header
       className="admin-navbar"
@@ -36,12 +33,12 @@ const Navbar = ({ onToggle }) => {
         ☰
       </button>
 
-      {/* ✅ PANEL-MATCHING LOGOUT */}
+      {/* PANEL-MATCHING LOGOUT */}
       <button
         className="logout-btn"
         onClick={handleLogout}
         style={{
-          background: "#111827", // same family as sidebar
+          background: "#111827",
           color: "#ffffff",
           border: "1px solid #111827",
           padding: "8px 20px",
@@ -63,5 +60,4 @@ const Navbar = ({ onToggle }) => {
     </header>
   );
 };
-
 export default Navbar;

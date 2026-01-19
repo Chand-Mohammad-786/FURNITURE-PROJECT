@@ -12,7 +12,6 @@ import {
   resetPassword,
   sendWelcomeMail,
 } from "../controller/userController.js";
-
 import {
   placeOrder,
   getOrdersByUser,
@@ -38,5 +37,5 @@ userRouter.put("/orders/cancel/:id", cancelOrder);
 userRouter.delete("/orders/remove/:id", removeOrderFromHistory);
 userRouter.get("/orders/track/:trackingNumber", trackOrder);
 userRouter.get("/orders/:userId", getOrdersByUser);
-
+userRouter.post("/send-welcome-mail", sendWelcomeMail);
 export default userRouter;

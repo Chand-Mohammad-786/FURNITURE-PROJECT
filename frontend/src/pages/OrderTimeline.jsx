@@ -1,8 +1,6 @@
 import React from "react";
-
 const OrderTimeline = ({ order }) => {
   const isCancelled = order.status === "Cancelled";
-
   const steps = isCancelled
     ? ["Ordered", "Cancelled"]
     : ["Ordered", "Processing", "Shipped", "Delivered"];
