@@ -67,6 +67,7 @@ const App = () => {
 
             <Route
               path="orders/:id"
+              z
               element={
                 <ProtectedRoute>
                   <OrderDetails />

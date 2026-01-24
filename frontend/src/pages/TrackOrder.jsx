@@ -12,7 +12,7 @@ function TrackOrder() {
     const fetchOrder = async () => {
       try {
         const res = await axios.get(
-          `${API_BASE}/user/order/track/${trackingNumber}`,
+          `${API_BASE}/user/orders/track/${trackingNumber}`,
         );
 
         setOrder(res.data.order);
@@ -37,6 +37,7 @@ function TrackOrder() {
     { title: "Shipped", time: timeline.shippedAt },
     { title: "Out For Delivery", time: timeline.outForDeliveryAt },
     { title: "Delivered", time: timeline.deliveredAt },
+    { title: "Cancelled", time: timeline.cancelledAt },
   ];
 
   return (

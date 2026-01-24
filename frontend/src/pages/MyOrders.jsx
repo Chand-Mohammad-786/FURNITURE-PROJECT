@@ -240,6 +240,15 @@ const MyOrders = () => {
                 View
               </Link>
             </div>
+
+            <div className="col-6 col-md-auto">
+              <Link
+                to={`/track/${order.trackingNumber}`}
+                className="btn btn-success btn-sm w-100"
+              >
+                Track Order
+              </Link>
+            </div>
           </div>
         </div>
       ))}

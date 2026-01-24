@@ -268,6 +268,18 @@ export const updateOrderStatus = async (req, res) => {
 
     order.status = status;
     order.timeline = order.timeline || {};
+    // ===== AUTO TIMELINE UPDATES =====
+    if (status === "Processing") {
+      order.timeline.processedAt = new Date();
+    }
+
+    if (status === "Shipped") {
+      order.timeline.shippedAt = new Date();
+    }
+
+    if (status === "Delivered") {
+      order.timeline.deliveredAt = new Date();
+    }
 
     // When Admin Cancels Order
     if (status === "Cancelled") {
