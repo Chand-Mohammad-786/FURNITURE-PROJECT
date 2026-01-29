@@ -91,9 +91,9 @@ app.set("io", io);
 export { io };
 
 io.on("connection", (socket) => {
-  console.log("⚡ Socket Connected:", socket.id);
+  console.log("Socket Connected:", socket.id);
   socket.on("disconnect", () => {
-    console.log("❌ Socket Disconnected:", socket.id);
+    console.log("Socket Disconnected:", socket.id);
   });
 });
 
@@ -114,5 +114,5 @@ app.get("/test-email", async (req, res) => {
 
 /* ===== Start Server ===== */
 httpServer.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
