@@ -409,7 +409,7 @@ export const sendWelcomeMail = async (req, res) => {
       to: email,
       subject: "Welcome to Furniture Store",
       html: `
-        <h2>Welcome 🎉</h2>
+        <h2>Welcome </h2>
         <p>Your account has been created successfully.</p>
       `,
     });
