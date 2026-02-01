@@ -118,6 +118,7 @@ export const login = async (req, res) => {
 };
 
 /* ===================== FIND USERS ===================== */
+
 export const findUser = async (req, res) => {
   try {
     const data = await userDataSchema.find();
