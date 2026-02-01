@@ -46,7 +46,7 @@ const Signup = () => {
         display: "flex",
         justifyContent: "center",
         padding: "20px 16px 0",
-        marginBottom: "-40px", // 🔥 stronger neutralization (safe)
+        marginBottom: "-40px", //  stronger neutralization (safe)
       }}
     >
       {/* ===== SIGNUP CARD ===== */}
@@ -59,7 +59,7 @@ const Signup = () => {
           borderRadius: "8px",
           background: "#f8f9fa",
           boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-          marginBottom: 0, // ❌ no internal gap
+          marginBottom: 0, //  no internal gap
         }}
       >
         <h2 style={{ textAlign: "center", marginBottom: "14px" }}>Signup</h2>

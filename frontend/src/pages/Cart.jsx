@@ -34,12 +34,12 @@ function Cart() {
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // ✅ FIXED: use _id
+  //  FIXED: use _id
   const increase = (id) => {
     updateCart(
       cartItems.map((item) =>
-        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
+        item._id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
     );
   };
 
@@ -51,8 +51,8 @@ function Cart() {
               ...item,
               quantity: item.quantity > 1 ? item.quantity - 1 : 1,
             }
-          : item
-      )
+          : item,
+      ),
     );
   };
 

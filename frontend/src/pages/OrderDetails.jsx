@@ -33,7 +33,7 @@ const OrderDetail = () => {
       <h4 className="mt-3">Items</h4>
 
       {order.items.map((item, i) => {
-        // ✅ Direct snapshot from backend
+        // Direct snapshot from backend
         const product = item.productSnapshot || {};
 
         const hasHTML =
