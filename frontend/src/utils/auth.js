@@ -17,7 +17,7 @@ export const getToken = () => {
   return localStorage.getItem("authToken");
 };
 
-// ⭐ Correct & Safe JWT Decode Function
+//  Correct & Safe JWT Decode Function
 export const parseJwt = (token) => {
   try {
     const base64Url = token.split(".")[1];
