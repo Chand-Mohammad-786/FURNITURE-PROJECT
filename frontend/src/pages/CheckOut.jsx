@@ -33,7 +33,7 @@ function CheckOut() {
 
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
-    0
+    0,
   );
 
   const placeOrder = async () => {
@@ -86,7 +86,7 @@ function CheckOut() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       localStorage.removeItem("cart");
@@ -99,7 +99,7 @@ function CheckOut() {
       Swal.fire(
         "Error",
         err.response?.data?.message || "Order failed",
-        "error"
+        "error",
       );
     }
   };
