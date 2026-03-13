@@ -31,7 +31,7 @@ const Sidebar = ({ open, onClose }) => {
     lineHeight: "1.2",
     textDecoration: "none",
 
-    /* 🔥 FIX FOR SINGLE LINE */
+    /*  FIX FOR SINGLE LINE */
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
