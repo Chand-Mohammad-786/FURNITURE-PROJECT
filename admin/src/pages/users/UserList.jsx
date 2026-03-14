@@ -78,7 +78,7 @@ const UserList = () => {
 
   return (
     <div className="section-card">
-      <h2>User List</h2>
+      <h2 style={{ border: "2px solid red" }}>User List</h2>
 
       <table className="dashboard-table">
         <thead>
