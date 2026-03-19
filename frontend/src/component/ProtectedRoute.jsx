@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { getToken, isTokenValid } from "../utils/auth";
-
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
   const token = getToken();
@@ -12,5 +11,4 @@ const ProtectedRoute = ({ children }) => {
 
   return children;
 };
-
 export default ProtectedRoute;
