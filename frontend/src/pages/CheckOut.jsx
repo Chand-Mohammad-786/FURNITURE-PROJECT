@@ -40,6 +40,7 @@ function CheckOut() {
     const token = getToken();
     const user = parseJwt(token);
     const userId = user?._id || user?.id;
+    console.log("EMAIL FROM FORM:", form.email);
 
     if (!userId) {
       Swal.fire("Error", "User not authenticated", "error");

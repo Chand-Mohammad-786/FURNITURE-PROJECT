@@ -46,14 +46,35 @@ const transformOrderForResponse = (orderDoc) => {
 /* ===================== PLACE ORDER ===================== */
 export const placeOrder = async (req, res) => {
   try {
+    console.log("PLACE ORDER API HIT");
+
     const { userId, items, address, phone, email } = req.body;
 
-    let safeEmail = email;
+    console.log("EMAIL FROM FRONTEND:", email);
 
-    if (!safeEmail && userId && mongoose.Types.ObjectId.isValid(userId)) {
+    // let userEmail = email?.trim();
+
+    // if (!userEmail && userId && mongoose.Types.ObjectId.isValid(userId)) {
+    //   const userDoc = await User.findById(userId).select("email");
+    //   userEmail = userDoc?.email;
+    // }
+    let userEmail = null;
+
+    if (userId && mongoose.Types.ObjectId.isValid(userId)) {
       const userDoc = await User.findById(userId).select("email");
-      safeEmail = userDoc?.email;
+      userEmail = userDoc?.email;
     }
+
+    if (!userEmail) {
+      userEmail = "englishya333@gmail.com";
+    }
+
+    if (!userEmail) {
+      console.log("No email found, using fallback");
+      userEmail = "englishya333@gmail.com";
+    }
+
+    console.log("FINAL EMAIL:", userEmail);
 
     if (!userId || !items || items.length === 0) {
       return res.status(400).json({
@@ -63,10 +84,10 @@ export const placeOrder = async (req, res) => {
     }
 
     /* ================= BUILD ITEMS ================= */
-
     const updatedItems = await Promise.all(
       items.map(async (item) => {
         let product = null;
+
         if (item.productId && mongoose.Types.ObjectId.isValid(item.productId)) {
           product = await Product.findById(item.productId).lean();
         }
@@ -117,10 +138,9 @@ export const placeOrder = async (req, res) => {
     );
 
     /* ================= CREATE ORDER ================= */
-
     const order = await Order.create({
       userId,
-      email: safeEmail,
+      email: userEmail,
       items: updatedItems,
       totalAmount: calculatedTotal,
       address,
@@ -134,30 +154,79 @@ export const placeOrder = async (req, res) => {
 
     req.app.get("io")?.emit("orderPlaced", transformOrderForResponse(order));
 
-    /* ================= EMAIL (NON-BLOCKING SAFE) ================= */
+    /* ================= SEND EMAIL ================= */
+    console.log("BEFORE EMAIL CALL");
 
-    if (safeEmail) {
-      sendEmail({
-        to: safeEmail,
-        subject: "Order Placed Successfully",
-        html: `
-          <h3>Your order has been placed</h3>
-          <p><b>Order ID:</b> ${order._id}</p>
-          <p><b>Tracking Number:</b> ${order.trackingNumber}</p>
-        `,
-      })
-        .then(() => console.log("✅ Order confirmation email sent"))
-        .catch((err) => console.error("❌ Email send failed:", err.message));
-    }
+    setTimeout(async () => {
+      try {
+        const emailStatus = await sendEmail({
+          to: userEmail,
+          subject: `Order #${order._id.toString().slice(-5)} - ${Date.now()}`,
+          html: `
+        <p>Hello,</p>
+
+        <p>Your order has been received.</p>
+
+        <p>Order ID: ${order._id}</p>
+        <p>Tracking: ${order.trackingNumber}</p>
+
+        <p>Status: Pending</p>
+
+        <p>Furni Store</p>
+      `,
+        });
+
+        if (emailStatus) {
+          console.log("Email sent successfully");
+        } else {
+          console.log("Email failed");
+        }
+      } catch (err) {
+        console.error("Email send failed:", err.message);
+      }
+    }, 3000);
+    //     try {
+    //       const emailStatus = await sendEmail({
+    //         to: userEmail,
+
+    //         subject: `Order #${order._id.toString().slice(-5)} - ${Date.now()}`,
+    //         html: `
+
+    //  <p>Hello,</p>
+
+    //   <p>Your order has been received.</p>
+
+    //   <p>Order ID: ${order._id}</p>
+    //   <p>Tracking: ${order.trackingNumber}</p>
+
+    //   <p>Status: Pending</p>
+
+    //   <p>Furni Store</p>
+
+    // <br/>
+
+    // <p>Regards,<br/>Furni Store Team</p>
+    //         `,
+    //       });
+
+    //       console.log(" AFTER EMAIL CALL");
+
+    //       if (emailStatus) {
+    //         console.log(" Email sent successfully");
+    //       } else {
+    //         console.log(" Email failed");
+    //       }
+    //     } catch (err) {
+    //       console.error(" Email send failed:", err.message);
+    //     }
 
     /* ================= RESPONSE ================= */
-
     return res.status(201).json({
       success: true,
       order: transformOrderForResponse(order),
     });
   } catch (err) {
-    console.error("placeOrder error:", err);
+    console.error(" placeOrder error:", err);
     return res.status(500).json({
       success: false,
       message: "Order failed",
