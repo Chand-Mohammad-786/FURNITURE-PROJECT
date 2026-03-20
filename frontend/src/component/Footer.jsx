@@ -128,17 +128,17 @@ const Footer = () => {
             <div className="col-lg-6">
               <p className=" text-center text-lg-start">
                 © All Rights Reserved. — Designed with love by{" "}
-                <a href="https://untree.co" target="_blank" rel="noreferrer">
+                <Link to="https://untree.co" target="_blank" rel="noreferrer">
                   Untree.co
-                </a>{" "}
+                </Link>{" "}
                 Distributed By{" "}
-                <a
-                  href="https://themewagon.com"
+                <Link
+                  to="https://themewagon.com"
                   target="_blank"
                   rel="noreferrer"
                 >
                   ThemeWagon
-                </a>
+                </Link>
               </p>
             </div>
 
