@@ -20,7 +20,7 @@ import CheckOut from "./pages/CheckOut";
 import Thankyou from "./pages/Thankyou";
 import OrderDetails from "./pages/OrderDetails";
 
-// ⭐ ADD THIS NEW IMPORT
+//  ADD THIS NEW IMPORT
 import TrackOrder from "./pages/TrackOrder";
 
 import { ToastContainer } from "react-toastify";
@@ -74,7 +74,7 @@ const App = () => {
               }
             />
 
-            {/* ⭐ NEW — TRACK ORDER PAGE */}
+            {/*  NEW — TRACK ORDER PAGE */}
             <Route path="track/:trackingNumber" element={<TrackOrder />} />
 
             {/* AUTH ROUTES */}
