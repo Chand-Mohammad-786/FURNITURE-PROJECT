@@ -185,40 +185,6 @@ export const placeOrder = async (req, res) => {
         console.error("Email send failed:", err.message);
       }
     }, 3000);
-    //     try {
-    //       const emailStatus = await sendEmail({
-    //         to: userEmail,
-
-    //         subject: `Order #${order._id.toString().slice(-5)} - ${Date.now()}`,
-    //         html: `
-
-    //  <p>Hello,</p>
-
-    //   <p>Your order has been received.</p>
-
-    //   <p>Order ID: ${order._id}</p>
-    //   <p>Tracking: ${order.trackingNumber}</p>
-
-    //   <p>Status: Pending</p>
-
-    //   <p>Furni Store</p>
-
-    // <br/>
-
-    // <p>Regards,<br/>Furni Store Team</p>
-    //         `,
-    //       });
-
-    //       console.log(" AFTER EMAIL CALL");
-
-    //       if (emailStatus) {
-    //         console.log(" Email sent successfully");
-    //       } else {
-    //         console.log(" Email failed");
-    //       }
-    //     } catch (err) {
-    //       console.error(" Email send failed:", err.message);
-    //     }
 
     /* ================= RESPONSE ================= */
     return res.status(201).json({
@@ -370,9 +336,9 @@ export const updateOrderStatus = async (req, res) => {
           `,
         });
 
-        console.log("✅ Admin cancel email sent");
+        console.log(" Admin cancel email sent");
       } else {
-        console.log("❌ No email found for this order");
+        console.log(" No email found for this order");
       }
     }
 
@@ -462,7 +428,7 @@ export const removeOrderFromHistory = async (req, res) => {
 
     await Order.findByIdAndDelete(req.params.id);
 
-    // 🔔 SOCKET UPDATE
+    // SOCKET UPDATE
     req.app.get("io")?.emit("orderRemoved", req.params.id);
 
     return res.json({
@@ -492,7 +458,7 @@ export const deleteOrder = async (req, res) => {
 
     await Order.findByIdAndDelete(req.params.id);
 
-    // 🔔 SOCKET UPDATE
+    //  SOCKET UPDATE
     req.app.get("io")?.emit("orderRemoved", order._id);
 
     return res.json({
