@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Homeherosection = () => {
   return (
-    <section className="hero">
+    <section id="home-hero" className="hero">
       <div className="container">
         <div className="row justify-content-between ">
           <div className="col-lg-5">

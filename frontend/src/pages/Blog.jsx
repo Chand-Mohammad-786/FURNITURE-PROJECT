@@ -85,7 +85,7 @@ const Blog = () => {
   return (
     <>
       {/* HERO SECTION */}
-      <div className="hero">
+      <div id="blog-hero" className="hero">
         <div className="container">
           <div className="row justify-content-between">
             <div className="col-lg-5 align-items-start">

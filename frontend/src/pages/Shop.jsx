@@ -5,7 +5,7 @@ const Shop = () => {
   return (
     <>
       {/*  HERO SECTION — Shop banner */}
-      <div className="hero">
+      <div id="shop-hero" className="hero">
         <div className="container">
           <h1>Shop</h1>
         </div>

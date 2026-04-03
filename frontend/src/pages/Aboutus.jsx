@@ -10,7 +10,7 @@ const Aboutus = () => {
       <>
         {/* Start Hero Section */}
 
-        <div className="hero ">
+        <div id="about-hero" className="hero">
           <div className="container">
             <div className="row justify-content-between">
               <div className="col-lg-5">

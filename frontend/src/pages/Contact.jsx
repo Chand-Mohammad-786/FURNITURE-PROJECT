@@ -71,7 +71,7 @@ const Contact = () => {
   return (
     <>
       {/* ================= HERO ================= */}
-      <div className="hero">
+      <div id="contact-hero" className="hero">
         <div className="container">
           <div className="row justify-content-between align-items-start">
             <div className="col-lg-5">

@@ -5,7 +5,7 @@ import Hometestimonialsection from "./Hometestimonialsection";
 const Service = () => {
   return (
     <>
-      <div className="hero">
+      <div id="service-hero" className="hero">
         <div className="container">
           <div className="row justify-content-between">
             <div className="col-lg-5 align-items-start">

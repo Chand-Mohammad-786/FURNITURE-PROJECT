@@ -60,8 +60,15 @@ const Footer = () => {
               <div className="col-6 col-sm-6 col-md-3">
                 <ul className="list-unstyled">
                   <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/shop">Shop</Link>
+                  </li>
+                  <li>
                     <Link to="/aboutus">About us</Link>
                   </li>
+
                   <li>
                     <Link to="/services">Services</Link>
                   </li>
