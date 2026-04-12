@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema(
     email: {
       type: String,
       trim: true,
+      match: [/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Invalid email"],
     },
     // Items
     items: [
@@ -56,7 +57,12 @@ const orderSchema = new mongoose.Schema(
     },
     //  Address.
     address: { type: String, required: true },
-    phone: { type: String, required: true },
+    phone: {
+      type: String,
+      required: true,
+      trim: true,
+      match: [/^[0-9]{10}$/, "Invalid phone"],
+    },
     // Tracking.
     trackingNumber: { type: String, default: "" },
     trackingURL: { type: String, default: "" },

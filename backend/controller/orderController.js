@@ -48,7 +48,46 @@ export const placeOrder = async (req, res) => {
   try {
     console.log("PLACE ORDER API HIT");
 
+    // const { userId, items, address, phone, email } = req.body;
     const { userId, items, address, phone, email } = req.body;
+
+    // ✅ ADD THIS VALIDATION
+    const phoneRegex = /^[0-9]{10}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    // if (!userId || !items || items.length === 0) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Invalid order data",
+    //   });
+    // }
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid items",
+      });
+    }
+
+    if (!address || address.trim().length < 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid address",
+      });
+    }
+
+    if (!phoneRegex.test(phone?.trim())) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid phone number",
+      });
+    }
+
+    if (!emailRegex.test(email?.trim())) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid email",
+      });
+    }
 
     console.log("EMAIL FROM FRONTEND:", email);
 
@@ -58,30 +97,62 @@ export const placeOrder = async (req, res) => {
     //   const userDoc = await User.findById(userId).select("email");
     //   userEmail = userDoc?.email;
     // }
-    let userEmail = null;
+    // let userEmail = null;
 
-    if (userId && mongoose.Types.ObjectId.isValid(userId)) {
+    // if (userId && mongoose.Types.ObjectId.isValid(userId)) {
+    //   const userDoc = await User.findById(userId).select("email");
+    //   userEmail = userDoc?.email;
+    // }
+
+    let userEmail = email?.trim();
+
+    if (!userEmail && userId && mongoose.Types.ObjectId.isValid(userId)) {
       const userDoc = await User.findById(userId).select("email");
       userEmail = userDoc?.email;
     }
-
     if (!userEmail) {
-      userEmail = "englishya333@gmail.com";
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid user",
+      });
     }
 
-    if (!userEmail) {
-      console.log("No email found, using fallback");
-      userEmail = "englishya333@gmail.com";
-    }
+    // if (!userEmail) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Email is required",
+    //   });
+    // }
+
+    // if (!userEmail) {
+    //   userEmail = "englishya333@gmail.com";
+    // }
+    // if (!userEmail) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "User email not found",
+    //   });
+    // }
+
+    // if (!userEmail) {
+    //   console.log("No email found, using fallback");
+    //   userEmail = "englishya333@gmail.com";
+    // }
 
     console.log("FINAL EMAIL:", userEmail);
 
-    if (!userId || !items || items.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid order data",
-      });
-    }
+    // if (!userId || !items || items.length === 0) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Invalid order data",
+    //   });
+    // }
 
     /* ================= BUILD ITEMS ================= */
     const updatedItems = await Promise.all(
@@ -143,8 +214,10 @@ export const placeOrder = async (req, res) => {
       email: userEmail,
       items: updatedItems,
       totalAmount: calculatedTotal,
-      address,
-      phone,
+      // address,
+      // phone,
+      address: address.trim(),
+      phone: phone.trim(),
       paymentMethod: "cod",
       invoiceNumber: generateInvoice(),
       trackingNumber: generateTrackingNumber(),

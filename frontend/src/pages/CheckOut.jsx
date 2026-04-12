@@ -36,7 +36,43 @@ function CheckOut() {
     0,
   );
 
+  const validateForm = () => {
+    const nameRegex = /^[A-Za-z ]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    if (!nameRegex.test(form.fname.trim())) {
+      Swal.fire("Error", "Invalid First Name", "error");
+      return false;
+    }
+
+    if (!nameRegex.test(form.lname.trim())) {
+      Swal.fire("Error", "Invalid Last Name", "error");
+      return false;
+    }
+
+    if (!emailRegex.test(form.email.trim())) {
+      Swal.fire("Error", "Invalid Email", "error");
+      return false;
+    }
+
+    if (!phoneRegex.test(form.phone.trim())) {
+      Swal.fire("Error", "Phone must be 10 digits", "error");
+      return false;
+    }
+
+    if (!form.address || form.address.trim().length < 5) {
+      Swal.fire("Error", "Address is too short", "error");
+      return false;
+    }
+
+    return true;
+  };
+
   const placeOrder = async () => {
+    if (!validateForm()) {
+      return;
+    }
     const token = getToken();
     const user = parseJwt(token);
     const userId = user?._id || user?.id;
@@ -47,10 +83,10 @@ function CheckOut() {
       return;
     }
 
-    if (!form.address || !form.phone || !form.email) {
-      Swal.fire("Error", "Please fill all details", "warning");
-      return;
-    }
+    // if (!form.address || !form.phone || !form.email) {
+    //   Swal.fire("Error", "Please fill all details", "warning");
+    //   return;
+    // }
 
     const items = cartItems.map((item) => ({
       productId: item._id || null,
@@ -116,6 +152,14 @@ function CheckOut() {
 
           <div className="row">
             <div className="col-md-6 mb-3">
+              {/* <input
+                type="text"
+                className="form-control"
+                placeholder="First Name"
+                name="fname"
+                value={form.fname}
+                onChange={handleChange}
+              /> */}
               <input
                 type="text"
                 className="form-control"
@@ -123,10 +167,21 @@ function CheckOut() {
                 name="fname"
                 value={form.fname}
                 onChange={handleChange}
+                pattern="[A-Za-z ]+"
+                title="Only letters allowed"
+                required
               />
             </div>
 
             <div className="col-md-6 mb-3">
+              {/* <input
+                type="text"
+                className="form-control"
+                placeholder="Last Name"
+                name="lname"
+                value={form.lname}
+                onChange={handleChange}
+              /> */}
               <input
                 type="text"
                 className="form-control"
@@ -134,10 +189,21 @@ function CheckOut() {
                 name="lname"
                 value={form.lname}
                 onChange={handleChange}
+                pattern="[A-Za-z ]+"
+                title="Only letters allowed"
+                required
               />
             </div>
           </div>
 
+          {/* <input
+            type="email"
+            className="form-control mb-3"
+            placeholder="Email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+          /> */}
           <input
             type="email"
             className="form-control mb-3"
@@ -145,17 +211,40 @@ function CheckOut() {
             name="email"
             value={form.email}
             onChange={handleChange}
+            required
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+            title="Enter a valid email (example: abc@gmail.com)"
           />
 
-          <input
+          {/* <input
             type="text"
             className="form-control mb-3"
             placeholder="Phone"
             name="phone"
             value={form.phone}
             onChange={handleChange}
+          /> */}
+          <input
+            type="tel"
+            className="form-control mb-3"
+            placeholder="Phone"
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            pattern="[0-9]{10}"
+            maxLength="10"
+            title="Enter 10 digit number"
+            required
           />
 
+          {/* <textarea
+            className="form-control"
+            rows="3"
+            placeholder="Address"
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+          /> */}
           <textarea
             className="form-control"
             rows="3"
@@ -163,6 +252,7 @@ function CheckOut() {
             name="address"
             value={form.address}
             onChange={handleChange}
+            required
           />
         </div>
 
