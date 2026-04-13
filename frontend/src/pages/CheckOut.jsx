@@ -39,7 +39,7 @@ function CheckOut() {
   const validateForm = () => {
     const nameRegex = /^[A-Za-z ]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
 
     if (!nameRegex.test(form.fname.trim())) {
@@ -70,18 +70,11 @@ function CheckOut() {
       Swal.fire("Error", "Email must contain only one @", "error");
       return false;
     }
-    // if (form.email.split(".").length > 3) {
-    //   Swal.fire("Error", "Invalid email format", "error");
-    //   return false;
-    // }
+
     if (form.email.includes("..")) {
       Swal.fire("Error", "Email cannot contain consecutive dots", "error");
       return false;
     }
-    // if (!form.email.includes(".com") && !form.email.includes(".in")) {
-    //   Swal.fire("Error", "Invalid domain", "error");
-    //   return false;
-    // }
 
     return true;
   };
@@ -99,11 +92,6 @@ function CheckOut() {
       Swal.fire("Error", "User not authenticated", "error");
       return;
     }
-
-    // if (!form.address || !form.phone || !form.email) {
-    //   Swal.fire("Error", "Please fill all details", "warning");
-    //   return;
-    // }
 
     const items = cartItems.map((item) => ({
       productId: item._id || null,
@@ -169,21 +157,12 @@ function CheckOut() {
 
           <div className="row">
             <div className="col-md-6 mb-3">
-              {/* <input
-                type="text"
-                className="form-control"
-                placeholder="First Name"
-                name="fname"
-                value={form.fname}
-                onChange={handleChange}
-              /> */}
               <input
                 type="text"
                 className="form-control"
                 placeholder="First Name"
                 name="fname"
                 value={form.fname}
-                // onChange={handleChange}
                 onChange={(e) => {
                   const value = e.target.value.replace(/[^A-Za-z ]/g, "");
                   setForm({ ...form, fname: value });
@@ -195,21 +174,12 @@ function CheckOut() {
             </div>
 
             <div className="col-md-6 mb-3">
-              {/* <input
-                type="text"
-                className="form-control"
-                placeholder="Last Name"
-                name="lname"
-                value={form.lname}
-                onChange={handleChange}
-              /> */}
               <input
                 type="text"
                 className="form-control"
                 placeholder="Last Name"
                 name="lname"
                 value={form.lname}
-                // onChange={handleChange}
                 onChange={(e) => {
                   const value = e.target.value.replace(/[^A-Za-z ]/g, "");
                   setForm({ ...form, lname: value });
@@ -221,31 +191,19 @@ function CheckOut() {
             </div>
           </div>
 
-          {/* <input
-            type="email"
-            className="form-control mb-3"
-            placeholder="Email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-          /> */}
           <input
             type="email"
             className="form-control mb-3"
             placeholder="Email"
             name="email"
             value={form.email}
-            // onChange={handleChange}
             onChange={(e) => {
               let value = e.target.value;
 
-              // remove spaces
               value = value.replace(/\s/g, "");
 
-              // allow only valid email characters
               value = value.replace(/[^a-zA-Z0-9@._]/g, "");
 
-              // allow only ONE @
               const parts = value.split("@");
               if (parts.length > 2) {
                 value = parts[0] + "@" + parts.slice(1).join("");
@@ -258,21 +216,12 @@ function CheckOut() {
             title="Enter a valid email (example: abc@gmail.com)"
           />
 
-          {/* <input
-            type="text"
-            className="form-control mb-3"
-            placeholder="Phone"
-            name="phone"
-            value={form.phone}
-            onChange={handleChange}
-          /> */}
           <input
             type="tel"
             className="form-control mb-3"
             placeholder="Phone"
             name="phone"
             value={form.phone}
-            // onChange={handleChange}
             onChange={(e) => {
               const value = e.target.value.replace(/[^0-9]/g, "");
               setForm({ ...form, phone: value });
@@ -283,14 +232,6 @@ function CheckOut() {
             required
           />
 
-          {/* <textarea
-            className="form-control"
-            rows="3"
-            placeholder="Address"
-            name="address"
-            value={form.address}
-            onChange={handleChange}
-          /> */}
           <textarea
             className="form-control"
             rows="3"
@@ -302,7 +243,6 @@ function CheckOut() {
           />
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="col-md-5">
           <h5 className="mb-3">Your Order</h5>
 
