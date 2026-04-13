@@ -39,7 +39,8 @@ function CheckOut() {
   const validateForm = () => {
     const nameRegex = /^[A-Za-z ]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
 
     if (!nameRegex.test(form.fname.trim())) {
       Swal.fire("Error", "Invalid First Name", "error");
@@ -65,6 +66,22 @@ function CheckOut() {
       Swal.fire("Error", "Address is too short", "error");
       return false;
     }
+    if ((form.email.match(/@/g) || []).length !== 1) {
+      Swal.fire("Error", "Email must contain only one @", "error");
+      return false;
+    }
+    // if (form.email.split(".").length > 3) {
+    //   Swal.fire("Error", "Invalid email format", "error");
+    //   return false;
+    // }
+    if (form.email.includes("..")) {
+      Swal.fire("Error", "Email cannot contain consecutive dots", "error");
+      return false;
+    }
+    // if (!form.email.includes(".com") && !form.email.includes(".in")) {
+    //   Swal.fire("Error", "Invalid domain", "error");
+    //   return false;
+    // }
 
     return true;
   };
@@ -166,7 +183,11 @@ function CheckOut() {
                 placeholder="First Name"
                 name="fname"
                 value={form.fname}
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/[^A-Za-z ]/g, "");
+                  setForm({ ...form, fname: value });
+                }}
                 pattern="[A-Za-z ]+"
                 title="Only letters allowed"
                 required
@@ -188,7 +209,11 @@ function CheckOut() {
                 placeholder="Last Name"
                 name="lname"
                 value={form.lname}
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/[^A-Za-z ]/g, "");
+                  setForm({ ...form, lname: value });
+                }}
                 pattern="[A-Za-z ]+"
                 title="Only letters allowed"
                 required
@@ -210,7 +235,24 @@ function CheckOut() {
             placeholder="Email"
             name="email"
             value={form.email}
-            onChange={handleChange}
+            // onChange={handleChange}
+            onChange={(e) => {
+              let value = e.target.value;
+
+              // remove spaces
+              value = value.replace(/\s/g, "");
+
+              // allow only valid email characters
+              value = value.replace(/[^a-zA-Z0-9@._]/g, "");
+
+              // allow only ONE @
+              const parts = value.split("@");
+              if (parts.length > 2) {
+                value = parts[0] + "@" + parts.slice(1).join("");
+              }
+
+              setForm({ ...form, email: value });
+            }}
             required
             pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
             title="Enter a valid email (example: abc@gmail.com)"
@@ -230,7 +272,11 @@ function CheckOut() {
             placeholder="Phone"
             name="phone"
             value={form.phone}
-            onChange={handleChange}
+            // onChange={handleChange}
+            onChange={(e) => {
+              const value = e.target.value.replace(/[^0-9]/g, "");
+              setForm({ ...form, phone: value });
+            }}
             pattern="[0-9]{10}"
             maxLength="10"
             title="Enter 10 digit number"
